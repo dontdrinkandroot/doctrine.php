@@ -1,0 +1,46 @@
+{
+    "name": "dontdrinkandroot/doctrine",
+    "description": "Doctrine Extensions",
+    "keywords": ["php", "doctrine"],
+    "type": "library",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Philip Washington Sorst",
+            "email": "philip@sorst.net",
+            "homepage": "https://sorst.net"
+        }
+    ],
+    "autoload": {
+        "psr-0": {"": "src/"}
+    },
+    "autoload-dev": {
+        "psr-0": {
+            "": "test/"
+        }
+    },
+    "require": {
+        "php": ">=5.5",
+        "psr/log": "~1.0",
+        "doctrine/orm": "~2.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "squizlabs/php_codesniffer": "~2.0",
+        "phpunit/dbunit": "^2.0",
+        "scrutinizer/ocular": "^1.1",
+        "doctrine/data-fixtures": "^1.1"
+
+    },
+    "suggest": {
+        "doctrine/data-fixtures": "For data fixture testing"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
