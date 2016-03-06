@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<dataset>
+    <table name="GeneratedIdExampleEntity">
+        <column>id</column>
+        <column>name</column>
+        <row>
+            <value>1</value>
+            <value>qwer</value>
+        </row>
+        <row>
+            <value>2</value>
+            <value>asdf</value>
+        </row>
+        <row>
+            <value>3</value>
+            <value>yxcv</value>
+        </row>
+    </table>
+
+</dataset>
