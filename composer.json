@@ -23,7 +23,7 @@
         "php": ">=5.5",
         "psr/log": "~1.0",
         "doctrine/orm": "^2.4.8",
-        "dontdrinkandroot/utils": "0.4.x-dev"
+        "dontdrinkandroot/utils": "0.5.x-dev"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
