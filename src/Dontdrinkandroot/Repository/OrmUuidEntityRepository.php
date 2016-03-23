@@ -2,15 +2,11 @@
 
 namespace Dontdrinkandroot\Repository;
 
-use Dontdrinkandroot\Entity\UuidEntityInterface;
-
 class OrmUuidEntityRepository extends OrmEntityRepository
 {
 
     /**
-     * @param string $uuid
-     *
-     * @return UuidEntityInterface|null
+     * {@inheritdoc}
      */
     public function findByUuid($uuid)
     {
