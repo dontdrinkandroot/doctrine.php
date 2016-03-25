@@ -63,7 +63,10 @@ class EntityService extends AbstractService implements EntityServiceInterface
             return $entity;
         }
 
-        $this->repository->flush($entity);
+        /* Flush if not in transaction */
+        if (!$this->repository->getTransactionManager()->isInTransaction()) {
+            $this->repository->flush($entity);
+        }
 
         return $entity;
     }

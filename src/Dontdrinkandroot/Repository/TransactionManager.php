@@ -36,6 +36,13 @@ class TransactionManager
         $this->entityManager->rollback();
     }
 
+    public function isInTransaction()
+    {
+        $hasTransaction = 0 !== $this->entityManager->getConnection()->getTransactionNestingLevel();
+
+        return ($hasTransaction);
+    }
+
     /**
      * @param callable $func
      *
