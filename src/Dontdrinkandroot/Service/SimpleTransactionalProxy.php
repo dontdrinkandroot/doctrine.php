@@ -5,7 +5,10 @@ namespace Dontdrinkandroot\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Dontdrinkandroot\Repository\TransactionManager;
 
-class TransactionalProxy
+/**
+ * Quick'n'Dirty Proxy.
+ */
+class SimpleTransactionalProxy
 {
 
     private $service;

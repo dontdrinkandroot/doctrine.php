@@ -17,7 +17,7 @@ class UuidEntityService extends EntityService
     {
         $entity = $this->findByUuid($uuid);
         if (null === $entity) {
-            throw new NoResultFoundException('No entity with uuiid: ' . $uuid);
+            throw new NoResultFoundException('No entity with uuid: ' . $uuid);
         }
 
         return $entity;

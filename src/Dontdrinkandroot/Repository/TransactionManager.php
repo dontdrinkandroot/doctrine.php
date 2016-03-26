@@ -61,7 +61,7 @@ class TransactionManager
 
             $this->commitTransaction();
 
-            return $return ?: true;
+            return $return;
         } catch (\Exception $e) {
             $this->entityManager->close();
             $this->rollbackTransaction();
