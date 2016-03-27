@@ -104,10 +104,19 @@ class EntityService extends AbstractService implements EntityServiceInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getTransactionManager()
+    {
+        return $this->getRepository()->getTransactionManager();
+    }
+
+    /**
      * @return EntityRepositoryInterface
      */
     protected function getRepository()
     {
         return $this->repository;
     }
+
 }

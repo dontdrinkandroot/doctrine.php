@@ -5,6 +5,7 @@ namespace Dontdrinkandroot\Service;
 use Dontdrinkandroot\Entity\EntityInterface;
 use Dontdrinkandroot\Exception\NoResultFoundException;
 use Dontdrinkandroot\Pagination\PaginatedResult;
+use Dontdrinkandroot\Repository\TransactionManager;
 
 interface EntityServiceInterface
 {
@@ -59,4 +60,9 @@ interface EntityServiceInterface
      * Removes all entity of the corresponding type.
      */
     public function removeAll();
+
+    /**
+     * @return TransactionManager
+     */
+    public function getTransactionManager();
 }
