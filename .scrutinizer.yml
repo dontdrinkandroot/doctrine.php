@@ -3,7 +3,6 @@ filter:
 tools:
     external_code_coverage:
         timeout: 1200
-        runs: 2
     php_analyzer: true
     php_code_coverage: false
     php_code_sniffer:
