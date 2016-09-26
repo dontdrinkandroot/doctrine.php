@@ -7,7 +7,6 @@ use Dontdrinkandroot\Pagination\PaginatedResult;
 
 interface EntityRepositoryInterface extends ObjectRepository
 {
-
     /**
      * @param mixed $entity
      * @param bool  $flush

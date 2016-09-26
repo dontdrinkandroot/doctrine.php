@@ -9,7 +9,6 @@ use Dontdrinkandroot\Repository\TransactionManager;
 
 interface EntityServiceInterface
 {
-
     /**
      * @return EntityInterface[]
      */

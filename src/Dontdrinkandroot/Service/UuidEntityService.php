@@ -7,7 +7,6 @@ use Dontdrinkandroot\Repository\UuidEntityRepositoryInterface;
 
 class UuidEntityService extends EntityService
 {
-
     public function findByUuid($uuid)
     {
         return $this->getRepository()->findByUuid($uuid);

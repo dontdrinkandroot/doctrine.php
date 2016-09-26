@@ -4,7 +4,6 @@ namespace Dontdrinkandroot\Entity;
 
 interface IntegerIdEntityInterface extends EntityInterface
 {
-
     /**
      * @return int
      */

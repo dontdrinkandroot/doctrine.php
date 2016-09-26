@@ -6,7 +6,6 @@ use Dontdrinkandroot\Entity\EntityInterface;
 
 class EntityUtils
 {
-
     /**
      * @param EntityInterface[] $entities
      *

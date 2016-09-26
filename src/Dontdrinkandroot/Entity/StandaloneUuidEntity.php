@@ -4,7 +4,6 @@ namespace Dontdrinkandroot\Entity;
 
 class StandaloneUuidEntity implements EntityInterface, UuidEntityInterface
 {
-
     /** @var string */
     private $uuid;
 

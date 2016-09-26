@@ -11,7 +11,6 @@ use Dontdrinkandroot\Pagination\Pagination;
 
 class OrmEntityRepository extends EntityRepository implements EntityRepositoryInterface
 {
-
     protected $transactionManager;
 
     public function __construct($entityManager, ClassMetadata $classMetadata)

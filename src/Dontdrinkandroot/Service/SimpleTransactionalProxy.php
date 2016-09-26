@@ -10,7 +10,6 @@ use Dontdrinkandroot\Repository\TransactionManager;
  */
 class SimpleTransactionalProxy
 {
-
     private $service;
 
     /**

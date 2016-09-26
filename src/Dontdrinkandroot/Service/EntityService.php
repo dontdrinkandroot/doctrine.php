@@ -8,7 +8,6 @@ use Dontdrinkandroot\Repository\EntityRepositoryInterface;
 
 class EntityService extends AbstractService implements EntityServiceInterface
 {
-
     /**
      * @var EntityRepositoryInterface
      */
@@ -19,7 +18,6 @@ class EntityService extends AbstractService implements EntityServiceInterface
      */
     public function __construct(EntityRepositoryInterface $repository)
     {
-
         $this->repository = $repository;
     }
 
@@ -118,5 +116,4 @@ class EntityService extends AbstractService implements EntityServiceInterface
     {
         return $this->repository;
     }
-
 }

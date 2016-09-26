@@ -4,7 +4,6 @@ namespace Dontdrinkandroot\Entity;
 
 interface UpdatedEntityInterface
 {
-
     /**
      * @return \DateTime|null
      */

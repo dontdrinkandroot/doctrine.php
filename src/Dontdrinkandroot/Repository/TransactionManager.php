@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class TransactionManager
 {
-
     /**
      * @var EntityManagerInterface
      */
