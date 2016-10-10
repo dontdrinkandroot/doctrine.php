@@ -5,7 +5,7 @@ namespace Dontdrinkandroot\Service;
 use Dontdrinkandroot\Entity\UuidEntityInterface;
 use Dontdrinkandroot\Exception\NoResultFoundException;
 
-interface UuidEntityServiceInterface
+interface UuidEntityServiceInterface extends EntityServiceInterface
 {
     /**
      * @param string $uuid
