@@ -5,7 +5,7 @@ namespace Dontdrinkandroot\Service;
 use Dontdrinkandroot\Exception\NoResultFoundException;
 use Dontdrinkandroot\Repository\UuidEntityRepositoryInterface;
 
-class UuidEntityService extends EntityService
+class UuidEntityService extends EntityService implements UuidEntityServiceInterface
 {
     public function findByUuid($uuid)
     {
@@ -29,5 +29,4 @@ class UuidEntityService extends EntityService
     {
         return $this->repository;
     }
-
 }
