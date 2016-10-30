@@ -11,8 +11,19 @@ class OrmUuidEntityRepository extends OrmEntityRepository
     {
         return $this->getTransactionManager()->transactional(
             function () use ($uuid) {
-                return $this->findOneBy(['uuid' => $uuid]);
+                $query = $this->createFindByUuidQuery($uuid);
+
+                return $query->getSingleResult();
             }
         );
+    }
+
+    protected function createFindByUuidQuery($uuid)
+    {
+        $queryBuilder = $this->createQueryBuilder('entity');
+        $queryBuilder->where('entity.uuid = :uuid');
+        $queryBuilder->setParameter('uuid', $uuid);
+
+        return $queryBuilder->getQuery();
     }
 }
