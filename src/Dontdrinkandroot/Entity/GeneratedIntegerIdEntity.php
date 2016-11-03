@@ -36,7 +36,7 @@ class GeneratedIntegerIdEntity implements IntegerIdEntityInterface
      *
      * @return bool
      */
-    public function isSame($other): bool
+    public function isSame($other)
     {
         if (null === $other || !is_object($other)) {
             return false;
