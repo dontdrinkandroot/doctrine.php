@@ -116,4 +116,12 @@ class EntityService extends AbstractService implements EntityServiceInterface
     {
         return $this->repository;
     }
+
+    /**
+     * @return string
+     */
+    public function getEntityClass()
+    {
+        return $this->getRepository()->getClassName();
+    }
 }

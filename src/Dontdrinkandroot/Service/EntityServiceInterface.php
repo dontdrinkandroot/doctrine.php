@@ -64,4 +64,9 @@ interface EntityServiceInterface
      * @return TransactionManager
      */
     public function getTransactionManager();
+
+    /**
+     * @return string
+     */
+    public function getEntityClass();
 }
