@@ -13,7 +13,7 @@ class OrmUuidEntityRepository extends OrmEntityRepository
             function () use ($uuid) {
                 $query = $this->createFindByUuidQuery($uuid);
 
-                return $query->getSingleResult();
+                return $query->getOneOrNullResult();
             }
         );
     }
