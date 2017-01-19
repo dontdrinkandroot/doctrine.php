@@ -53,7 +53,7 @@ class EntityService extends AbstractService implements EntityServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function save(EntityInterface $entity)
+    public function save(EntityInterface $entity, $forceFlush = false)
     {
         if (null === $entity->getId()) {
             $this->repository->persist($entity);
@@ -62,7 +62,7 @@ class EntityService extends AbstractService implements EntityServiceInterface
         }
 
         /* Flush if not in transaction */
-        if (!$this->repository->getTransactionManager()->isInTransaction()) {
+        if ($forceFlush || !$this->repository->getTransactionManager()->isInTransaction()) {
             $this->repository->flush($entity);
         }
 
