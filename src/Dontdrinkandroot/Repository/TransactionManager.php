@@ -21,13 +21,17 @@ class TransactionManager
         $this->entityManager->beginTransaction();
     }
 
-    public function commitTransaction()
+    public function commitTransaction(): bool
     {
         $nestingLevel = $this->entityManager->getConnection()->getTransactionNestingLevel();
+        $flush = false;
         if (1 === $nestingLevel) {
+            $flush = true;
             $this->entityManager->flush();
         }
         $this->entityManager->commit();
+
+        return $flush;
     }
 
     public function rollbackTransaction()
