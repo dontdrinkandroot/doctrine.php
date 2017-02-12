@@ -2,7 +2,7 @@
 
 namespace Dontdrinkandroot\Repository;
 
-class OrmUuidEntityRepository extends OrmEntityRepository
+class OrmUuidEntityRepository extends OrmEntityRepository implements UuidEntityRepositoryInterface
 {
     /**
      * {@inheritdoc}
