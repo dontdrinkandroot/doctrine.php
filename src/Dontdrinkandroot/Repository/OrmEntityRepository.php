@@ -5,9 +5,8 @@ namespace Dontdrinkandroot\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Dontdrinkandroot\Entity\EntityInterface;
-use Dontdrinkandroot\Pagination\PaginatedResult;
-use Dontdrinkandroot\Pagination\Pagination;
 
 class OrmEntityRepository extends EntityRepository implements EntityRepositoryInterface
 {
@@ -166,45 +165,26 @@ class OrmEntityRepository extends EntityRepository implements EntityRepositoryIn
     {
         return $this->transactionManager->transactional(
             function () use ($page, $perPage, $criteria, $orderBy) {
-                $persister = $this->getEntityManager()->getUnitOfWork()->getEntityPersister($this->_entityName);
-                $total = $this->count($criteria);
-                $results = $persister->loadAll($criteria, $orderBy, $perPage, ($page - 1) * $perPage);
 
-                $pagination = new Pagination($page, $perPage, $total);
-                $paginatedResult = new PaginatedResult($pagination, $results);
+                $queryBuilder = $this->createQueryBuilder('entity');
+                $expr = $queryBuilder->expr();
 
-                return $paginatedResult;
+                foreach ($criteria as $field => $value) {
+                    $queryBuilder->andWhere($expr->eq('entity.' . $field, $value));
+                }
+
+                if (null !== $orderBy) {
+                    foreach ($orderBy as $field => $order) {
+                        $queryBuilder->addOrderBy('entity.' . $field, $order);
+                    }
+                }
+
+                $queryBuilder->setFirstResult(($page - 1) * $perPage);
+                $queryBuilder->setMaxResults($perPage);
+
+                return new Paginator($queryBuilder);
             }
         );
-    }
-
-    /**
-     * @param array $criteria
-     *
-     * @return int
-     */
-    private function count(array $criteria = [])
-    {
-
-        $persister = $this->getEntityManager()->getUnitOfWork()->getEntityPersister($this->_entityName);
-
-        if (method_exists($persister, 'count')) {
-            return $persister->count($criteria);
-        }
-
-        $queryBuilder = $this->createBlankQueryBuilder();
-        $queryBuilder
-            ->select('COUNT(entity)')
-            ->from($this->getEntityName(), 'entity');
-
-        if (count($criteria) > 0) {
-            $expr = $queryBuilder->expr();
-            foreach ($criteria as $field => $value) {
-                $queryBuilder->andWhere($expr->eq('entity' . $field, $value));
-            }
-        }
-
-        return (int)$queryBuilder->getQuery()->getSingleScalarResult();
     }
 
     /**

@@ -2,9 +2,9 @@
 
 namespace Dontdrinkandroot\Service;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Dontdrinkandroot\Entity\EntityInterface;
 use Dontdrinkandroot\Exception\NoResultFoundException;
-use Dontdrinkandroot\Pagination\PaginatedResult;
 use Dontdrinkandroot\Repository\TransactionManager;
 
 interface EntityServiceInterface
@@ -18,7 +18,7 @@ interface EntityServiceInterface
      * @param int $page
      * @param int $perPage
      *
-     * @return PaginatedResult
+     * @return Paginator
      */
     public function listPaginated($page, $perPage);
 

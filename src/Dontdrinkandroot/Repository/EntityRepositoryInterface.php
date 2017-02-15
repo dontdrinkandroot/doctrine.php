@@ -3,7 +3,7 @@
 namespace Dontdrinkandroot\Repository;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Dontdrinkandroot\Pagination\PaginatedResult;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 interface EntityRepositoryInterface extends ObjectRepository
 {
@@ -46,10 +46,10 @@ interface EntityRepositoryInterface extends ObjectRepository
     public function remove($entity, $flush = false);
 
     /**
+     * Removes all entities managed by the repository.
+     *
      * @param bool $flush
      * @param bool $iterate Iterate over each entity so all triggers are called.
-     *
-     * Removes all entities managed by the repository.
      */
     public function removeAll($flush = false, $iterate = true);
 
@@ -59,7 +59,7 @@ interface EntityRepositoryInterface extends ObjectRepository
      * @param array      $criteria
      * @param array|null $orderBy
      *
-     * @return PaginatedResult
+     * @return Paginator
      */
     public function findPaginatedBy($page = 1, $perPage = 10, array $criteria = [], array $orderBy = null);
 
