@@ -167,10 +167,10 @@ class OrmEntityRepository extends EntityRepository implements EntityRepositoryIn
             function () use ($page, $perPage, $criteria, $orderBy) {
 
                 $queryBuilder = $this->createQueryBuilder('entity');
-                $expr = $queryBuilder->expr();
 
                 foreach ($criteria as $field => $value) {
-                    $queryBuilder->andWhere($expr->eq('entity.' . $field, $value));
+                    $queryBuilder->andWhere('entity.' . $field . ' = :' . $field);
+                    $queryBuilder->setParameter($field, $value);
                 }
 
                 if (null !== $orderBy) {
