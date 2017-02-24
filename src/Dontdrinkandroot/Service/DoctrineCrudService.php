@@ -28,11 +28,6 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
         return new Paginator($queryBuilder);
     }
 
-    protected function isUuid($id)
-    {
-        return 1 === preg_match('/^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$/', $id);
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -82,8 +77,6 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
 
         $queryBuilder->setFirstResult(($page - 1) * $perPage);
         $queryBuilder->setMaxResults($perPage);
-
-        $queryBuilder->getQuery();
 
         return new Paginator($queryBuilder);
     }
