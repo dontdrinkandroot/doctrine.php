@@ -9,6 +9,10 @@ matrix:
             php: 7.1
             env: dependencies=highest
 
+cache:
+    directories:
+        - $HOME/.composer/cache
+
 before_script:
     - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
     - if [ -z "$dependencies" ]; then composer install; fi;
