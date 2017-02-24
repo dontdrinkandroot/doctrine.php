@@ -9,7 +9,7 @@ use Dontdrinkandroot\Repository\EntityRepositoryInterface;
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
-class EntityService extends AbstractService implements EntityServiceInterface
+class EntityService implements EntityServiceInterface
 {
     /**
      * @var EntityRepositoryInterface
