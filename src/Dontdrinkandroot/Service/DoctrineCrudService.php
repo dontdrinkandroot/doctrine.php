@@ -7,29 +7,12 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-class DoctrineEntityRepositoryCrudService extends EntityRepository implements CrudServiceInterface
+class DoctrineCrudService extends EntityRepository implements CrudServiceInterface
 {
-    public function __construct($entityManager, $entityClass)
-    {
-        parent::__construct($entityManager, $entityManager->getClassMetadata($entityClass));
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function findById($id)
-    {
-        if ($this->isUuid($id)) {
-            return $this->findOneBy(['uuid' => $id]);
-        }
-
-        return $this->find($id);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function listPaginated(int $page, int $perPage = 50): Paginator
+    public function findAllPaginated(int $page = 1, int $perPage = 50): Paginator
     {
         $queryBuilder = $this->createQueryBuilder('entity');
         $queryBuilder->setFirstResult(($page - 1) * $perPage);
@@ -76,7 +59,7 @@ class DoctrineEntityRepositoryCrudService extends EntityRepository implements Cr
     /**
      * {@inheritdoc}
      */
-    public function listAssociationPaginated($entity, string $fieldName, int $page = 1, $perPage = 50)
+    public function findAssociationPaginated($entity, string $fieldName, int $page = 1, $perPage = 50)
     {
         $classMetadata = $this->getEntityManager()->getClassMetadata(get_class($entity));
         $targetClass = $classMetadata->getAssociationTargetClass($fieldName);
