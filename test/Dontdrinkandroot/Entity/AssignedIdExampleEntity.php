@@ -12,12 +12,14 @@ class AssignedIdExampleEntity implements EntityInterface
     /**
      * @Id
      * @Column(type="integer")
+     *
      * @var int
      */
     protected $id;
 
     /**
      * @Column(type="string")
+     *
      * @var string
      */
     protected $name;
