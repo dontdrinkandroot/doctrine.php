@@ -7,13 +7,15 @@ namespace Dontdrinkandroot\Entity;
  */
 class DefaultUuidEntity extends GeneratedIntegerIdEntity implements UuidEntityInterface
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     private $uuid;
 
     /**
      * @return string
      */
-    public function getUuid()
+    public function getUuid(): ?string
     {
         return $this->uuid;
     }
@@ -21,7 +23,7 @@ class DefaultUuidEntity extends GeneratedIntegerIdEntity implements UuidEntityIn
     /**
      * @param string $uuid
      */
-    public function setUuid($uuid)
+    public function setUuid(string $uuid)
     {
         $this->uuid = $uuid;
     }

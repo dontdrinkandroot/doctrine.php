@@ -9,7 +9,9 @@ use Doctrine\Common\Util\ClassUtils;
  */
 class GeneratedIntegerIdEntity implements IntegerIdEntityInterface
 {
-    /** @var int */
+    /**
+     * @var int
+     */
     private $id;
 
     public function __construct()
@@ -19,7 +21,7 @@ class GeneratedIntegerIdEntity implements IntegerIdEntityInterface
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -27,7 +29,7 @@ class GeneratedIntegerIdEntity implements IntegerIdEntityInterface
     /**
      * @return bool
      */
-    public function isPersisted()
+    public function isPersisted(): bool
     {
         return null !== $this->id;
     }
@@ -52,7 +54,7 @@ class GeneratedIntegerIdEntity implements IntegerIdEntityInterface
             return false;
         }
 
-        /** @var AbstractEntity $otherEntity */
+        /** @var EntityInterface $otherEntity */
         $otherEntity = $other;
 
         return $this->getId() === $otherEntity->getId();

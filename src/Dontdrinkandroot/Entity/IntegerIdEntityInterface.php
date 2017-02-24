@@ -10,5 +10,5 @@ interface IntegerIdEntityInterface extends EntityInterface
     /**
      * @return int
      */
-    public function getId();
+    public function getId(): ?int;
 }

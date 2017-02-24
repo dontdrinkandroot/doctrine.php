@@ -7,13 +7,15 @@ namespace Dontdrinkandroot\Entity;
  */
 class StandaloneUuidEntity implements EntityInterface, UuidEntityInterface
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     private $uuid;
 
     /**
      * @return string
      */
-    public function getUuid()
+    public function getUuid(): ?string
     {
         return $this->uuid;
     }
@@ -21,7 +23,7 @@ class StandaloneUuidEntity implements EntityInterface, UuidEntityInterface
     /**
      * @param string $uuid
      */
-    public function setUuid($uuid)
+    public function setUuid(string $uuid)
     {
         $this->uuid = $uuid;
     }

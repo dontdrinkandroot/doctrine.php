@@ -10,7 +10,7 @@ interface CreatedEntityInterface
     /**
      * @return \DateTime|null
      */
-    public function getCreated();
+    public function getCreated(): ?\DateTime;
 
     /**
      * @param \DateTime $created

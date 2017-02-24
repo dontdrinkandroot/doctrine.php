@@ -10,7 +10,7 @@ interface UpdatedEntityInterface
     /**
      * @return \DateTime|null
      */
-    public function getUpdated();
+    public function getUpdated(): ?\DateTime;
 
     /**
      * @param \DateTime $updated

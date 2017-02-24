@@ -12,10 +12,10 @@ interface UuidEntityInterface extends EntityInterface
     /**
      * @return string
      */
-    public function getUuid();
+    public function getUuid(): ?string;
 
     /**
      * @param string $uuid
      */
-    public function setUuid($uuid);
+    public function setUuid(string $uuid);
 }

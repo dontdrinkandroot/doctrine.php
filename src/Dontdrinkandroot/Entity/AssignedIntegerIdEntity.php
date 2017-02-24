@@ -7,7 +7,9 @@ namespace Dontdrinkandroot\Entity;
  */
 class AssignedIntegerIdEntity
 {
-    /** @var int */
+    /**
+     * @var int
+     */
     private $id;
 
     /**
