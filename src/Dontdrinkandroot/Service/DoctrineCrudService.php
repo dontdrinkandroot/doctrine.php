@@ -5,10 +5,17 @@ namespace Dontdrinkandroot\Service;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class DoctrineCrudService extends EntityRepository implements CrudServiceInterface
 {
+    /**
+     * @var  LoggerInterface
+     */
+    private $logger;
+
     /**
      * {@inheritdoc}
      */
@@ -133,5 +140,25 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
         } else {
             return $association['inversedBy'];
         }
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger): void
+    {
+        $this->logger = $logger;
+    }
+
+    /**
+     * @return LoggerInterface
+     */
+    public function getLogger(): LoggerInterface
+    {
+        if (null === $this->logger) {
+            $this->logger = new NullLogger();
+        }
+
+        return $this->logger;
     }
 }
