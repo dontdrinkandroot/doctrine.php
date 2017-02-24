@@ -2,9 +2,12 @@
 
 namespace Dontdrinkandroot\Service;
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Mapping;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Dontdrinkandroot\Repository\TransactionManager;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -15,6 +18,17 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
      * @var  LoggerInterface
      */
     private $logger;
+
+    /**
+     * @var TransactionManager
+     */
+    private $transactionManager;
+
+    public function __construct(EntityManager $em, Mapping\ClassMetadata $class)
+    {
+        parent::__construct($em, $class);
+        $this->transactionManager = new TransactionManager($em);
+    }
 
     /**
      * {@inheritdoc}
