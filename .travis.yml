@@ -1,13 +1,22 @@
 language: php
 
-php:
-    - 7.1
+matrix:
+    include:
+        -
+            php: 7.1
+            env: dependencies=lowest
+        -
+            php: 7.1
+            env: dependencies=highest
 
 before_script:
-    - composer install
+    - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
+    - if [ -z "$dependencies" ]; then composer install; fi;
+    - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest -n; fi;
+    - if [ "$dependencies" = "highest" ]; then composer update -n; fi;
 
 script:
     - bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
 after_script:
-    - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then php bin/ocular code-coverage:upload --format=php-clover coverage.clover; fi
+    - php bin/ocular code-coverage:upload --format=php-clover coverage.clover
