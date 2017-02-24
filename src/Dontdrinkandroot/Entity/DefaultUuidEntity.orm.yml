@@ -1,0 +1,7 @@
+Dontdrinkandroot\Entity\DefaultUuidEntity:
+    type: mappedSuperclass
+    fields:
+        uuid:
+            type: guid
+            nullable: false
+            unique: true

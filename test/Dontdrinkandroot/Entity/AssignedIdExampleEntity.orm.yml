@@ -1,0 +1,6 @@
+Dontdrinkandroot\Entity\AssignedIdExampleEntity:
+    type: entity
+    repositoryClass: Dontdrinkandroot\Repository\AssignedIdExampleEntityRepository
+    fields:
+        name:
+            type: string

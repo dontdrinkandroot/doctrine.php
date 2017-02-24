@@ -2,36 +2,9 @@
 
 namespace Dontdrinkandroot\Entity;
 
-/**
- * @Entity(repositoryClass="Dontdrinkandroot\Repository\GeneratedIdExampleEntityRepository")
- * @Table(name="GeneratedIdExampleEntity")
- */
-class GeneratedIdExampleEntity implements EntityInterface
+class GeneratedIdExampleEntity extends GeneratedIntegerIdEntity
 {
-
-    /**
-     * @Id
-     * @Column(type="integer")
-     * @GeneratedValue
-     *
-     * @var int
-     */
-    protected $id;
-
-    /**
-     * @Column(type="string")
-     * 
-     * @var string
-     */
     protected $name;
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * @return string

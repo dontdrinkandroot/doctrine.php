@@ -1,0 +1,6 @@
+Dontdrinkandroot\Entity\AssignedIntegerIdEntity:
+    type: mappedSuperclass
+    id:
+        id:
+            type: bigint
+            id: true

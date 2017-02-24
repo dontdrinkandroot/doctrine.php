@@ -4,12 +4,12 @@ namespace Dontdrinkandroot;
 
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\Setup;
 
 abstract class DoctrineOrmTestCase extends \PHPUnit_Extensions_Database_TestCase
 {
-
     /**
      * @var EntityManager
      */
@@ -44,6 +44,16 @@ abstract class DoctrineOrmTestCase extends \PHPUnit_Extensions_Database_TestCase
      */
     protected function getConfiguration()
     {
-        return Setup::createAnnotationMetadataConfiguration([realpath(__DIR__ . '/../')], true);
+        $configuration = Setup::createConfiguration(true);
+
+        $yamlDriver = new SimplifiedYamlDriver(
+            [
+                __DIR__ . '/../../src/Dontdrinkandroot/Entity' => 'Dontdrinkandroot\Entity',
+                __DIR__ . '/Entity'                            => 'Dontdrinkandroot\Entity'
+            ]
+        );
+        $configuration->setMetadataDriverImpl($yamlDriver);
+
+        return $configuration;
     }
 }

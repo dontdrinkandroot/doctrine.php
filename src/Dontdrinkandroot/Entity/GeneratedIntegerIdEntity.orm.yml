@@ -1,0 +1,8 @@
+Dontdrinkandroot\Entity\GeneratedIntegerIdEntity:
+    type: mappedSuperclass
+    id:
+        id:
+            type: bigint
+            id: true
+            generator:
+                strategy: AUTO
