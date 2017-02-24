@@ -5,6 +5,9 @@ namespace Dontdrinkandroot\Service;
 use Dontdrinkandroot\Exception\NoResultFoundException;
 use Dontdrinkandroot\Repository\UuidEntityRepositoryInterface;
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 class UuidEntityService extends EntityService implements UuidEntityServiceInterface
 {
     public function findByUuid($uuid)

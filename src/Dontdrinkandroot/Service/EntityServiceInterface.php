@@ -7,6 +7,9 @@ use Dontdrinkandroot\Entity\EntityInterface;
 use Dontdrinkandroot\Exception\NoResultFoundException;
 use Dontdrinkandroot\Repository\TransactionManager;
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 interface EntityServiceInterface
 {
     /**

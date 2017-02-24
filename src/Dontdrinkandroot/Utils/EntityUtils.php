@@ -4,6 +4,9 @@ namespace Dontdrinkandroot\Utils;
 
 use Dontdrinkandroot\Entity\EntityInterface;
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 class EntityUtils
 {
     /**

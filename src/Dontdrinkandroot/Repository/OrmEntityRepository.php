@@ -8,6 +8,9 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Dontdrinkandroot\Entity\EntityInterface;
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 class OrmEntityRepository extends EntityRepository implements EntityRepositoryInterface
 {
     protected $transactionManager;

@@ -4,6 +4,9 @@ namespace Dontdrinkandroot\Repository;
 
 use Doctrine\ORM\EntityManagerInterface;
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 class TransactionManager
 {
     /**

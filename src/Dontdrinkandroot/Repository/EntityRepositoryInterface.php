@@ -5,6 +5,9 @@ namespace Dontdrinkandroot\Repository;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 interface EntityRepositoryInterface extends ObjectRepository
 {
     /**

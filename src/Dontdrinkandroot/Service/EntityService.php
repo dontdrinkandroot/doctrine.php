@@ -6,6 +6,9 @@ use Dontdrinkandroot\Entity\EntityInterface;
 use Dontdrinkandroot\Exception\NoResultFoundException;
 use Dontdrinkandroot\Repository\EntityRepositoryInterface;
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 class EntityService extends AbstractService implements EntityServiceInterface
 {
     /**

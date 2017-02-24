@@ -4,6 +4,9 @@ namespace Dontdrinkandroot\Entity;
 
 use Doctrine\Common\Util\ClassUtils;
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 class GeneratedIntegerIdEntity implements IntegerIdEntityInterface
 {
     /** @var int */

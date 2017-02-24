@@ -2,6 +2,9 @@
 
 namespace Dontdrinkandroot\Repository;
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 class OrmUuidEntityRepository extends OrmEntityRepository implements UuidEntityRepositoryInterface
 {
     /**

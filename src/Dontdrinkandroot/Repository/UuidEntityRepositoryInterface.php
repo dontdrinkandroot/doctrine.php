@@ -4,6 +4,9 @@ namespace Dontdrinkandroot\Repository;
 
 use Dontdrinkandroot\Entity\UuidEntityInterface;
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 interface UuidEntityRepositoryInterface extends EntityRepositoryInterface
 {
     /**

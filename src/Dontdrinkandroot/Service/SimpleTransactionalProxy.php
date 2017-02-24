@@ -7,6 +7,8 @@ use Dontdrinkandroot\Repository\TransactionManager;
 
 /**
  * Quick'n'Dirty Proxy.
+ *
+ * @author Philip Washington Sorst <philip@sorst.net>
  */
 class SimpleTransactionalProxy
 {
