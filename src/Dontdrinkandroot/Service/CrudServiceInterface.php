@@ -2,11 +2,14 @@
 
 namespace Dontdrinkandroot\Service;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-interface CrudServiceInterface extends ObjectRepository
+interface CrudServiceInterface
 {
+    public function find($id);
+
+    public function findAll();
+
     public function findAllPaginated(int $page = 1, int $perPage = 50): Paginator;
 
     /**

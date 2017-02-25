@@ -4,7 +4,6 @@ namespace Dontdrinkandroot\Service;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Dontdrinkandroot\Repository\TransactionManager;
@@ -24,9 +23,19 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
      */
     private $transactionManager;
 
-    public function __construct(EntityManager $em, Mapping\ClassMetadata $class)
+    /**
+     * DoctrineCrudService constructor.
+     *
+     * @param EntityManager        $em
+     * @param ClassMetadata|string $class
+     */
+    public function __construct(EntityManager $em, $class)
     {
-        parent::__construct($em, $class);
+        $classMetaData = $class;
+        if (is_string($classMetaData)) {
+            $classMetaData = $em->getClassMetadata($classMetaData);
+        }
+        parent::__construct($em, $classMetaData);
         $this->transactionManager = new TransactionManager($em);
     }
 
