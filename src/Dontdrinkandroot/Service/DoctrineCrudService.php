@@ -105,9 +105,24 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
     }
 
     /**
-     * @param object     $entity
-     * @param string     $fieldName
-     * @param string|int $id
+     * {@inheritdoc}
+     */
+    public function createAssociation($entity, string $fieldName, $child)
+    {
+        $classMetadata = $this->getEntityManager()->getClassMetadata(get_class($entity));
+
+        $inverseFieldName = $this->getInverseFieldName($fieldName, $classMetadata);
+        $propertyAccessor = PropertyAccess::createPropertyAccessor();
+        $propertyAccessor->setValue($child, $inverseFieldName, $entity);
+
+        $this->getEntityManager()->persist($child);
+        $this->getEntityManager()->flush($child);
+
+        return $child;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function addToCollection($entity, string $fieldName, $id)
     {
@@ -124,9 +139,7 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
     }
 
     /**
-     * @param object     $entity
-     * @param string     $fieldName
-     * @param string|int $id
+     * {@inheritdoc}
      */
     public function removeFromCollection($entity, string $fieldName, $id)
     {
@@ -148,7 +161,7 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
      *
      * @return string
      */
-    public function getInverseFieldName(string $fieldName, ClassMetadata $classMetadata)
+    protected function getInverseFieldName(string $fieldName, ClassMetadata $classMetadata)
     {
         $association = $classMetadata->getAssociationMapping($fieldName);
         if ($classMetadata->isAssociationInverseSide($fieldName)) {

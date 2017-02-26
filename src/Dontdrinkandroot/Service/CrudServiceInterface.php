@@ -42,6 +42,15 @@ interface CrudServiceInterface
     public function findAssociationPaginated($entity, string $association, int $page = 1, $perPage = 50);
 
     /**
+     * @param object $entity
+     * @param string $fieldName
+     * @param object $child
+     *
+     * @return object
+     */
+    public function createAssociation($entity, string $fieldName, $child);
+
+    /**
      * @param object     $entity
      * @param string     $fieldName
      * @param string|int $id
