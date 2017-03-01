@@ -55,12 +55,12 @@ interface CrudServiceInterface
      * @param string     $fieldName
      * @param string|int $id
      */
-    public function addToCollection($entity, string $fieldName, $id);
+    public function addAssociation($entity, string $fieldName, $id);
 
     /**
      * @param object     $entity
      * @param string     $fieldName
      * @param string|int $id
      */
-    public function removeFromCollection($entity, string $fieldName, $id);
+    public function removeAssociation($entity, string $fieldName, $id);
 }

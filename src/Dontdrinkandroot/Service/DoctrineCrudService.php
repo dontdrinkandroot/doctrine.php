@@ -132,35 +132,52 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
     /**
      * {@inheritdoc}
      */
-    public function addToCollection($entity, string $fieldName, $id)
+    public function addAssociation($entity, string $fieldName, $id)
     {
         $classMetadata = $this->getEntityManager()->getClassMetadata(get_class($entity));
+        $collection = $classMetadata->isCollectionValuedAssociation($fieldName);
         $targetClass = $classMetadata->getAssociationTargetClass($fieldName);
 
-        $inverseFieldName = $this->getInverseFieldName($fieldName, $classMetadata);
+        if ($collection) {
+            $inverseFieldName = $this->getInverseFieldName($fieldName, $classMetadata);
 
-        $reference = $this->getEntityManager()->getReference($targetClass, $id);
-        $propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $propertyAccessor->setValue($reference, $inverseFieldName, $entity);
+            $reference = $this->getEntityManager()->getReference($targetClass, $id);
+            $propertyAccessor = PropertyAccess::createPropertyAccessor();
+            $propertyAccessor->setValue($reference, $inverseFieldName, $entity);
 
-        $this->getEntityManager()->flush($reference);
+            $this->getEntityManager()->flush($reference);
+        } else {
+            $reference = $this->getEntityManager()->getReference($targetClass, $id);
+            $propertyAccessor = PropertyAccess::createPropertyAccessor();
+            $propertyAccessor->setValue($entity, $fieldName, $reference);
+
+            $this->getEntityManager()->flush($entity);
+        }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeFromCollection($entity, string $fieldName, $id)
+    public function removeAssociation($entity, string $fieldName, $id)
     {
         $classMetadata = $this->getEntityManager()->getClassMetadata(get_class($entity));
+        $collection = $classMetadata->isCollectionValuedAssociation($fieldName);
         $targetClass = $classMetadata->getAssociationTargetClass($fieldName);
 
-        $inverseFieldName = $this->getInverseFieldName($fieldName, $classMetadata);
+        if ($collection) {
+            $inverseFieldName = $this->getInverseFieldName($fieldName, $classMetadata);
 
-        $reference = $this->getEntityManager()->getReference($targetClass, $id);
-        $propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $propertyAccessor->setValue($reference, $inverseFieldName, null);
+            $reference = $this->getEntityManager()->getReference($targetClass, $id);
+            $propertyAccessor = PropertyAccess::createPropertyAccessor();
+            $propertyAccessor->setValue($reference, $inverseFieldName, null);
 
-        $this->getEntityManager()->flush($reference);
+            $this->getEntityManager()->flush($reference);
+        } else {
+            $propertyAccessor = PropertyAccess::createPropertyAccessor();
+            $propertyAccessor->setValue($entity, $fieldName, null);
+
+            $this->getEntityManager()->flush($entity);
+        }
     }
 
     /**
