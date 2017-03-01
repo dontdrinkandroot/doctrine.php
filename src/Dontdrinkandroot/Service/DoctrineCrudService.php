@@ -5,6 +5,7 @@ namespace Dontdrinkandroot\Service;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Dontdrinkandroot\Repository\TransactionManager;
 use Psr\Log\LoggerInterface;
@@ -44,11 +45,18 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
      */
     public function findAllPaginated(int $page = 1, int $perPage = 50): Paginator
     {
-        $queryBuilder = $this->createQueryBuilder('entity');
+        $queryBuilder = $this->createFindAllQueryBuilder();
         $queryBuilder->setFirstResult(($page - 1) * $perPage);
         $queryBuilder->setMaxResults($perPage);
 
         return new Paginator($queryBuilder);
+    }
+
+    protected function createFindAllQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('entity');
+
+        return $queryBuilder;
     }
 
     /**
