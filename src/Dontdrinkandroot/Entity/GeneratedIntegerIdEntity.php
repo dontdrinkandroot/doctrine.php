@@ -50,7 +50,7 @@ class GeneratedIntegerIdEntity implements IntegerIdEntityInterface
         $thisClass = ClassUtils::getRealClass(get_class($this));
         $otherClass = ClassUtils::getRealClass(get_class($other));
 
-        if (!$thisClass === $otherClass) {
+        if ($thisClass !== $otherClass) {
             return false;
         }
 
