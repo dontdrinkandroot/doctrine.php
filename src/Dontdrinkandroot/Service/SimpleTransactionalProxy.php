@@ -27,7 +27,7 @@ class SimpleTransactionalProxy
 
     public function __call($method, $args)
     {
-        $callback = array($this->service, $method);
+        $callback = [$this->service, $method];
 
         return $this->transactionManager->transactional(
             function () use ($callback, $args) {
