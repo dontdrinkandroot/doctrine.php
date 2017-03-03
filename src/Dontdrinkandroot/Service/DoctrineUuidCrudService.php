@@ -4,7 +4,7 @@ namespace Dontdrinkandroot\Service;
 
 class DoctrineUuidCrudService extends DoctrineCrudService
 {
-    private $uuidField = 'uuid';
+    protected $uuidField = 'uuid';
 
     public function find($id, $lockMode = null, $lockVersion = null)
     {
