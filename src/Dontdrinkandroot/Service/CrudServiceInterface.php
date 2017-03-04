@@ -44,11 +44,10 @@ interface CrudServiceInterface
     /**
      * @param object $entity
      * @param string $fieldName
-     * @param object $child
      *
      * @return object
      */
-    public function createAssociation($entity, string $fieldName, $child);
+    public function createAssociation($entity, string $fieldName);
 
     /**
      * @param object     $entity

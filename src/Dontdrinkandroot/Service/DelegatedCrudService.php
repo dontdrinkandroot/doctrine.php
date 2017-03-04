@@ -75,9 +75,9 @@ class DelegatedCrudService implements CrudServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function createAssociation($entity, string $fieldName, $child)
+    public function createAssociation($entity, string $fieldName)
     {
-        return $this->delegate->createAssociation($entity, $fieldName, $child);
+        return $this->delegate->createAssociation($entity, $fieldName);
     }
 
     /**
