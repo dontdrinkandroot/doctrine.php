@@ -5,6 +5,7 @@ namespace Dontdrinkandroot;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\Common\DataFixtures\ReferenceRepository;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,6 +19,11 @@ abstract class DoctrineFixtureTestCase extends \PHPUnit_Framework_TestCase
      * @var EntityManagerInterface
      */
     protected $entityManager;
+
+    /**
+     * @var ReferenceRepository
+     */
+    private $referenceRepository;
 
     /**
      * {@inheritdoc}
@@ -74,6 +80,13 @@ abstract class DoctrineFixtureTestCase extends \PHPUnit_Framework_TestCase
         $purger = new ORMPurger();
         $executor = new ORMExecutor($this->entityManager, $purger);
         $executor->execute($loader->getFixtures());
+
+        $this->referenceRepository = $executor->getReferenceRepository();
+    }
+
+    protected function getReference(string $name)
+    {
+        return $this->referenceRepository->getReference($name);
     }
 
     abstract protected function getFixtures(): array;

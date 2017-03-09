@@ -96,8 +96,8 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
     public function findAssociationPaginated($entity, string $fieldName, int $page = 1, $perPage = 50)
     {
         $classMetadata = $this->getEntityManager()->getClassMetadata(get_class($entity));
+        $association = $classMetadata->associationMappings[$fieldName];
         $targetClass = $classMetadata->getAssociationTargetClass($fieldName);
-
         $inverseFieldName = $this->getInverseFieldName($fieldName, $classMetadata);
 
         $queryBuilder = $this->getEntityManager()->createQueryBuilder();
@@ -105,6 +105,14 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
         $queryBuilder->from($targetClass, 'association');
         $queryBuilder->join('association.' . $inverseFieldName, 'entity');
         $queryBuilder->where('entity = :entity');
+
+        if (array_key_exists('orderBy', $association)) {
+            $orderBy = $association['orderBy'];
+            foreach ($orderBy as $fieldName => $order) {
+                $queryBuilder->addOrderBy('association.' . $fieldName, $order);
+            }
+        }
+
         $queryBuilder->setParameter('entity', $entity);
 
         $queryBuilder->setFirstResult(($page - 1) * $perPage);

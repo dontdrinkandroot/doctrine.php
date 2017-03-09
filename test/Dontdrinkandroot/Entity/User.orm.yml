@@ -6,3 +6,7 @@ Dontdrinkandroot\Entity\User:
             type: string
             nullable: false
             unique: true
+    manyToMany:
+        groups:
+            targetEntity: Group
+            mappedBy: users

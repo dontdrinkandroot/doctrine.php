@@ -1,3 +1,10 @@
 Dontdrinkandroot\Entity\Group:
     type: entity
+    repositoryClass: Dontdrinkandroot\Service\DoctrineCrudService
     table: "`Group`"
+    manyToMany:
+        users:
+            targetEntity: User
+            inversedBy: groups
+            orderBy:
+                username: ASC
