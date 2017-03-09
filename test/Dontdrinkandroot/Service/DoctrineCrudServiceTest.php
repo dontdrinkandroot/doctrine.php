@@ -51,4 +51,21 @@ class DoctrineCrudServiceTest extends DoctrineFixtureTestCase
         $paginator = $service->findAssociationPaginated($user, 'groups');
         $this->assertCount(1, $paginator);
     }
+
+    public function testAddAssociation()
+    {
+        /** @var User $user */
+        $user = $this->getReference('user-10');
+        /** @var Group $group */
+        $group = $this->getReference('group-2');
+
+        /** @var DoctrineCrudService $service */
+        $service = $this->entityManager->getRepository(Group::class);
+        $this->assertInstanceOf(DoctrineCrudService::class, $service);
+
+        $service->addAssociation($group, 'users', $user->getId());
+
+        $paginator = $service->findAssociationPaginated($group, 'users');
+        $this->assertCount(1, $paginator);
+    }
 }
