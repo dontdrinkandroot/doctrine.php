@@ -8,7 +8,6 @@ use Dontdrinkandroot\Entity\GeneratedIdExampleEntity;
 
 class OrmEntityRepositoryTest extends DoctrineOrmTestCase
 {
-
     /**
      * {@inheritdoc}
      */

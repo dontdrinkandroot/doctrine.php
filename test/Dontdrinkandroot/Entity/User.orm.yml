@@ -1,0 +1,8 @@
+Dontdrinkandroot\Entity\User:
+    type: entity
+    repositoryClass: Dontdrinkandroot\Service\DoctrineUuidCrudService
+    fields:
+        username:
+            type: string
+            nullable: false
+            unique: true

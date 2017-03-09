@@ -10,7 +10,6 @@ use Dontdrinkandroot\Repository\GeneratedIdExampleEntityRepository;
 
 class EntityServiceTest extends DoctrineOrmTestCase
 {
-
     /**
      * {@inheritdoc}
      */
