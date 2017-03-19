@@ -28,6 +28,13 @@ class TransactionManager
     {
         $nestingLevel = $this->entityManager->getConnection()->getTransactionNestingLevel();
         $flush = false;
+
+        /* No active transaction */
+        if (0 == $nestingLevel) {
+            return $flush;
+        }
+
+        /* Topmost transaction, flush */
         if (1 === $nestingLevel) {
             $flush = true;
             $this->entityManager->flush();
