@@ -3,12 +3,19 @@
 namespace Dontdrinkandroot\Repository;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
 class TransactionManager
 {
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
     /**
      * @var EntityManagerInterface
      */
@@ -17,6 +24,7 @@ class TransactionManager
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
+        $this->logger = new NullLogger();
     }
 
     public function beginTransaction()
@@ -30,7 +38,9 @@ class TransactionManager
         $flush = false;
 
         /* No active transaction */
-        if (0 == $nestingLevel) {
+        if (!$this->isInTransaction()) {
+            $this->logger->warning('No active Transaction for commit');
+
             return $flush;
         }
 
@@ -46,6 +56,13 @@ class TransactionManager
 
     public function rollbackTransaction()
     {
+        /* No active transaction */
+        if (!$this->isInTransaction()) {
+            $this->logger->warning('No active Transaction for commit');
+
+            return;
+        }
+
         $this->entityManager->rollback();
     }
 
@@ -81,5 +98,13 @@ class TransactionManager
 
             throw $e;
         }
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
     }
 }
