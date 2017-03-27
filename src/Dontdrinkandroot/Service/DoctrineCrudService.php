@@ -78,11 +78,18 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
      */
     public function update($entity, bool $flush = false)
     {
-        if ($flush) {
+        if ($flush || $this->isVersioned($entity)) {
             $this->getEntityManager()->flush($entity);
         }
 
         return $entity;
+    }
+
+    protected function isVersioned($entity)
+    {
+        $classMetadata = $this->getEntityManager()->getClassMetadata(get_class($entity));
+
+        return $classMetadata->isVersioned;
     }
 
     /**
