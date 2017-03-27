@@ -63,10 +63,12 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
     /**
      * {@inheritdoc}
      */
-    public function create($entity)
+    public function create($entity, bool $flush = true)
     {
         $this->getEntityManager()->persist($entity);
-        $this->getEntityManager()->flush($entity);
+        if ($flush) {
+            $this->getEntityManager()->flush($entity);
+        }
 
         return $entity;
     }
@@ -74,9 +76,11 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
     /**
      * {@inheritdoc}
      */
-    public function update($entity)
+    public function update($entity, bool $flush = false)
     {
-        $this->getEntityManager()->flush($entity);
+        if ($flush) {
+            $this->getEntityManager()->flush($entity);
+        }
 
         return $entity;
     }
@@ -84,10 +88,12 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
     /**
      * {@inheritdoc}
      */
-    public function remove($entity)
+    public function remove($entity, bool $flush = false)
     {
         $this->getEntityManager()->remove($entity);
-        $this->getEntityManager()->flush($entity);
+        if ($flush) {
+            $this->getEntityManager()->flush($entity);
+        }
     }
 
     /**
