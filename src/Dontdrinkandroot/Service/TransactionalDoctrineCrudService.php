@@ -176,4 +176,12 @@ class TransactionalDoctrineCrudService extends DoctrineCrudService
             }
         );
     }
+
+    /**
+     * @return TransactionManager
+     */
+    public function getTransactionManager(): TransactionManager
+    {
+        return $this->transactionManager;
+    }
 }
