@@ -10,7 +10,13 @@ interface CrudServiceInterface
 
     public function findAll();
 
-    public function findAllPaginated(int $page = 1, int $perPage = 50): Paginator;
+    /**
+     * @param int $page
+     * @param int $perPage
+     *
+     * @return Paginator|array
+     */
+    public function findAllPaginated(int $page = 1, int $perPage = 50);
 
     /**
      * @param object $entity
@@ -38,6 +44,8 @@ interface CrudServiceInterface
      * @param string $association
      * @param int    $page
      * @param int    $perPage
+     *
+     * @return Paginator|array
      */
     public function findAssociationPaginated($entity, string $association, int $page = 1, $perPage = 50);
 

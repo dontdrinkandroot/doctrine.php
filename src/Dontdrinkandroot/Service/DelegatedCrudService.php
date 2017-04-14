@@ -2,8 +2,6 @@
 
 namespace Dontdrinkandroot\Service;
 
-use Doctrine\ORM\Tools\Pagination\Paginator;
-
 class DelegatedCrudService implements CrudServiceInterface
 {
     /**
@@ -35,7 +33,7 @@ class DelegatedCrudService implements CrudServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function findAllPaginated(int $page = 1, int $perPage = 50): Paginator
+    public function findAllPaginated(int $page = 1, int $perPage = 50)
     {
         return $this->delegate->findAllPaginated($page, $perPage);
     }

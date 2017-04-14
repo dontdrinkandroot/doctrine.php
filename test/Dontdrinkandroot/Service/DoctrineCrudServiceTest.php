@@ -23,6 +23,16 @@ class DoctrineCrudServiceTest extends DoctrineFixtureTestCase
         $this->assertCount(10, $entities);
     }
 
+    public function testFindAllPaginated()
+    {
+        /** @var DoctrineCrudService $service */
+        $service = $this->entityManager->getRepository(User::class);
+        $paginator = $service->findAllPaginated(1, 5);
+
+        $this->assertCount(10, $paginator);
+        $this->assertCount(5, iterator_to_array($paginator->getIterator()));
+    }
+
     public function testFindAssociationPaginated()
     {
         /** @var DoctrineCrudService $service */
