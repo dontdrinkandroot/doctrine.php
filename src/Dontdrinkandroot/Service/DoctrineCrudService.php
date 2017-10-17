@@ -137,17 +137,18 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
     /**
      * {@inheritdoc}
      */
-    public function createAssociation($entity, string $fieldName)
+    public function createAssociation($entity, string $fieldName, $associatedEntity)
     {
         $classMetadata = $this->getEntityManager()->getClassMetadata(get_class($entity));
-        $targetClass = $classMetadata->getAssociationTargetClass($fieldName);
-        $child = new $targetClass;
 
         $inverseFieldName = $this->getInverseFieldName($fieldName, $classMetadata);
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $propertyAccessor->setValue($child, $inverseFieldName, $entity);
+        $propertyAccessor->setValue($associatedEntity, $inverseFieldName, $entity);
 
-        return $child;
+        $this->getEntityManager()->persist($associatedEntity);
+        $this->getEntityManager()->flush($associatedEntity);
+
+        return $associatedEntity;
     }
 
     /**

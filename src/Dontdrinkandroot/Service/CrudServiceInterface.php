@@ -52,10 +52,11 @@ interface CrudServiceInterface
     /**
      * @param object $entity
      * @param string $fieldName
+     * @param object $associatedEntity
      *
      * @return object
      */
-    public function createAssociation($entity, string $fieldName);
+    public function createAssociation($entity, string $fieldName, $associatedEntity);
 
     /**
      * @param object     $entity
