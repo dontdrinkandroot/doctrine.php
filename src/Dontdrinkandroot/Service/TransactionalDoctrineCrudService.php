@@ -94,11 +94,11 @@ class TransactionalDoctrineCrudService extends DoctrineCrudService
     /**
      * {@inheritdoc}
      */
-    public function createAssociation($entity, string $fieldName)
+    public function createAssociation($entity, string $fieldName, $associatedEntity)
     {
         return $this->transactionManager->transactional(
-            function () use ($entity, $fieldName) {
-                return parent::createAssociation($entity, $fieldName);
+            function () use ($entity, $fieldName, $associatedEntity) {
+                return parent::createAssociation($entity, $fieldName, $associatedEntity);
             }
         );
     }
