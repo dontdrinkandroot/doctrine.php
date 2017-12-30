@@ -145,9 +145,6 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
         $propertyAccessor->setValue($associatedEntity, $inverseFieldName, $entity);
 
-        $this->getEntityManager()->persist($associatedEntity);
-        $this->getEntityManager()->flush($associatedEntity);
-
         return $associatedEntity;
     }
 
