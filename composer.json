@@ -16,13 +16,13 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "": "src/"
+        "psr-4": {
+            "Dontdrinkandroot\\": "src/"
         }
     },
     "autoload-dev": {
-        "psr-0": {
-            "": "test/"
+        "psr-4": {
+            "Dontdrinkandroot\\": "test/"
         }
     },
     "require": {

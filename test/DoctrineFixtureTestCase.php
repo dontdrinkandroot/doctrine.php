@@ -59,8 +59,8 @@ abstract class DoctrineFixtureTestCase extends \PHPUnit_Framework_TestCase
 
         $yamlDriver = new SimplifiedYamlDriver(
             [
-                __DIR__ . '/../../src/Dontdrinkandroot/Entity' => 'Dontdrinkandroot\Entity',
-                __DIR__ . '/Entity'                            => 'Dontdrinkandroot\Entity'
+                __DIR__ . '/../src/Entity' => 'Dontdrinkandroot\Entity',
+                __DIR__ . '/Entity'        => 'Dontdrinkandroot\Entity'
             ]
         );
         $configuration->setMetadataDriverImpl($yamlDriver);

@@ -48,8 +48,8 @@ abstract class DoctrineOrmTestCase extends \PHPUnit_Extensions_Database_TestCase
 
         $yamlDriver = new SimplifiedYamlDriver(
             [
-                __DIR__ . '/../../src/Dontdrinkandroot/Entity' => 'Dontdrinkandroot\Entity',
-                __DIR__ . '/Entity'                            => 'Dontdrinkandroot\Entity'
+                __DIR__ . '/../src/Entity' => 'Dontdrinkandroot\Entity',
+                __DIR__ . '/Entity'        => 'Dontdrinkandroot\Entity'
             ]
         );
         $configuration->setMetadataDriverImpl($yamlDriver);
