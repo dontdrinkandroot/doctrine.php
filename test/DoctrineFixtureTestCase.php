@@ -12,8 +12,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\Setup;
+use PHPUnit\Framework\TestCase;
 
-abstract class DoctrineFixtureTestCase extends \PHPUnit_Framework_TestCase
+abstract class DoctrineFixtureTestCase extends TestCase
 {
     /**
      * @var EntityManagerInterface
@@ -28,7 +29,7 @@ abstract class DoctrineFixtureTestCase extends \PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->entityManager = $this->createEntityManager();
         $this->loadFixtures();

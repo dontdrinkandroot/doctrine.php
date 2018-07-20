@@ -7,8 +7,9 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\Setup;
+use PHPUnit\DbUnit\TestCase;
 
-abstract class DoctrineOrmTestCase extends \PHPUnit_Extensions_Database_TestCase
+abstract class DoctrineOrmTestCase extends TestCase
 {
     /**
      * @var EntityManager

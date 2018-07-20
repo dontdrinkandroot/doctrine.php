@@ -33,9 +33,8 @@
         "symfony/property-access": "^3.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^5.7",
         "squizlabs/php_codesniffer": "~2.0",
-        "phpunit/dbunit": "^2.0",
+        "phpunit/dbunit": "^4.0",
         "scrutinizer/ocular": "^1.1",
         "doctrine/data-fixtures": "^1.1"
     },
