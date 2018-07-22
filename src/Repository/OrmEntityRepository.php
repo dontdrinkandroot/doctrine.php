@@ -2,6 +2,8 @@
 
 namespace Dontdrinkandroot\Repository;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder;
@@ -15,10 +17,37 @@ class OrmEntityRepository extends EntityRepository implements EntityRepositoryIn
 {
     protected $transactionManager;
 
-    public function __construct($entityManager, ClassMetadata $classMetadata)
-    {
-        parent::__construct($entityManager, $classMetadata);
-        $this->transactionManager = new TransactionManager($entityManager);
+    /**
+     * OrmEntityRepository constructor.
+     *
+     * @param ManagerRegistry|EntityManagerInterface $registryOrManager
+     * @param string|ClassMetadata                   $classNameOrMetadata
+     * @param TransactionManager|null                $transactionManager
+     */
+    public function __construct(
+        $registryOrManager,
+        $classNameOrMetadata,
+        ?TransactionManager $transactionManager = null
+    ) {
+        if ($registryOrManager instanceof ManagerRegistry) {
+            $manager = $registryOrManager->getManagerForClass($classNameOrMetadata);
+        } else {
+            $manager = $registryOrManager;
+        }
+
+        if ($classNameOrMetadata instanceof ClassMetadata) {
+            $classMetadata = $classNameOrMetadata;
+        } else {
+            $classMetadata = $manager->getClassMetadata($classNameOrMetadata);
+        }
+
+        parent::__construct($manager, $classMetadata);
+
+        if (null === $transactionManager) {
+            $this->transactionManager = new TransactionManager($manager);
+        } else {
+            $this->transactionManager = $transactionManager;
+        }
     }
 
     /**
