@@ -2,7 +2,7 @@
 
 namespace Dontdrinkandroot\Service;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Dontdrinkandroot\Repository\TransactionManager;
 
@@ -16,7 +16,7 @@ class TransactionalDoctrineCrudService extends DoctrineCrudService
      */
     private $transactionManager;
 
-    public function __construct(EntityManager $em, $class, TransactionManager $transactionManager = null)
+    public function __construct(EntityManagerInterface $em, $class, TransactionManager $transactionManager = null)
     {
         parent::__construct($em, $class);
         if (null !== $transactionManager) {

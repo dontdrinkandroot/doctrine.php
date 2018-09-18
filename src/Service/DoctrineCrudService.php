@@ -3,7 +3,7 @@
 namespace Dontdrinkandroot\Service;
 
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder;
@@ -28,10 +28,10 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
     /**
      * DoctrineCrudService constructor.
      *
-     * @param EntityManager        $em
-     * @param ClassMetadata|string $class
+     * @param EntityManagerInterface $em
+     * @param ClassMetadata|string   $class
      */
-    public function __construct(EntityManager $em, $class)
+    public function __construct(EntityManagerInterface $em, $class)
     {
         $classMetaData = $class;
         if (is_string($classMetaData)) {
