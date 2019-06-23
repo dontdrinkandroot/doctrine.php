@@ -2,6 +2,7 @@
 
 namespace Dontdrinkandroot\Service;
 
+use Doctrine\ORM\NoResultException;
 use Dontdrinkandroot\Exception\NoResultFoundException;
 use Dontdrinkandroot\Repository\UuidEntityRepositoryInterface;
 
@@ -19,7 +20,7 @@ class UuidEntityService extends EntityService implements UuidEntityServiceInterf
     {
         $entity = $this->findByUuid($uuid);
         if (null === $entity) {
-            throw new NoResultFoundException('No entity with uuid: ' . $uuid);
+            throw new NoResultException('No entity with uuid: ' . $uuid);
         }
 
         return $entity;

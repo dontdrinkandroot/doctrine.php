@@ -2,6 +2,7 @@
 
 namespace Dontdrinkandroot\Service;
 
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Dontdrinkandroot\Entity\EntityInterface;
 use Dontdrinkandroot\Exception\NoResultFoundException;
@@ -37,7 +38,7 @@ interface EntityServiceInterface
      *
      * @return mixed
      *
-     * @throws NoResultFoundException
+     * @throws NoResultException
      */
     public function fetchById($id);
 

@@ -2,6 +2,7 @@
 
 namespace Dontdrinkandroot\Service;
 
+use Doctrine\ORM\NoResultException;
 use Dontdrinkandroot\Entity\UuidEntityInterface;
 use Dontdrinkandroot\Exception\NoResultFoundException;
 
@@ -22,7 +23,7 @@ interface UuidEntityServiceInterface extends EntityServiceInterface
      *
      * @return UuidEntityInterface
      *
-     * @throws NoResultFoundException
+     * @throws NoResultException
      */
     public function fetchByUuid($uuid);
 }

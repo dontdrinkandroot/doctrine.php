@@ -2,6 +2,7 @@
 
 namespace Dontdrinkandroot\Service;
 
+use Doctrine\ORM\NoResultException;
 use Dontdrinkandroot\Entity\EntityInterface;
 use Dontdrinkandroot\Exception\NoResultFoundException;
 use Dontdrinkandroot\Repository\EntityRepositoryInterface;
@@ -47,7 +48,7 @@ class EntityService implements EntityServiceInterface
     {
         $entity = $this->findById($id);
         if (null === $entity) {
-            throw new NoResultFoundException('No entity with id: ' . $id);
+            throw new NoResultException('No entity with id: ' . $id);
         }
 
         return $entity;
