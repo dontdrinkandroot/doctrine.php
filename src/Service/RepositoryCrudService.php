@@ -24,7 +24,7 @@ class RepositoryCrudService implements CrudServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function find($id)
+    public function find($id): ?object
     {
         return $this->getRepository()->find($id);
     }
@@ -32,7 +32,7 @@ class RepositoryCrudService implements CrudServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function findAll()
+    public function findAll(): array
     {
         return $this->getRepository()->findAll();
     }

@@ -19,7 +19,7 @@ class DelegatedCrudService implements CrudServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function find($id)
+    public function find($id): ?object
     {
         return $this->delegate->find($id);
     }
@@ -64,42 +64,7 @@ class DelegatedCrudService implements CrudServiceInterface
         $this->delegate->remove($entity);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function findAssociationPaginated($entity, string $association, int $page = 1, $perPage = 50)
-    {
-        return $this->delegate->findAssociationPaginated($entity, $association, $page, $perPage);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createAssociation($entity, string $fieldName, $associatedEntity)
-    {
-        return $this->delegate->createAssociation($entity, $fieldName, $associatedEntity);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addAssociation($entity, string $fieldName, $id)
-    {
-        $this->delegate->addAssociation($entity, $fieldName, $id);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeAssociation($entity, string $fieldName, $id = null)
-    {
-        $this->delegate->removeAssociation($entity, $fieldName, $id);
-    }
-
-    /**
-     * @return CrudServiceInterface
-     */
-    protected function getDelegate()
+    protected function getDelegate(): CrudServiceInterface
     {
         return $this->delegate;
     }
