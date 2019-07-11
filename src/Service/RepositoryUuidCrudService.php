@@ -5,6 +5,7 @@ namespace Dontdrinkandroot\Service;
 use Dontdrinkandroot\Entity\UuidHelper;
 use Dontdrinkandroot\Repository\CrudRepositoryInterface;
 use Dontdrinkandroot\Repository\UuidCrudRepositoryInterface;
+use Dontdrinkandroot\Utils\EntityUtils;
 
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
@@ -23,7 +24,7 @@ class RepositoryUuidCrudService extends RepositoryCrudService implements UuidCru
 
     public function findByIdOrUuid($idOrUuid): ?object
     {
-        if (UuidHelper::isUuid($idOrUuid)) {
+        if (EntityUtils::isUuid($idOrUuid)) {
             return $this->findByUuid($idOrUuid);
         }
 
