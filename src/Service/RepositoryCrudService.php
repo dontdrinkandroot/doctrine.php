@@ -4,7 +4,6 @@ namespace Dontdrinkandroot\Service;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Dontdrinkandroot\Repository\CrudRepositoryInterface;
-use RuntimeException;
 
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
@@ -69,38 +68,6 @@ class RepositoryCrudService implements CrudServiceInterface
     public function remove(object $entity): void
     {
         $this->getRepository()->remove($entity, true);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findAssociationPaginated($entity, string $association, int $page = 1, $perPage = 50)
-    {
-        throw new RuntimeException('Not implemented');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createAssociation($entity, string $fieldName, $associatedEntity)
-    {
-        throw new RuntimeException('Not implemented');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addAssociation($entity, string $fieldName, $id)
-    {
-        throw new RuntimeException('Not implemented');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeAssociation($entity, string $fieldName, $id = null)
-    {
-        throw new RuntimeException('Not implemented');
     }
 
     protected function getRepository(): CrudRepositoryInterface
