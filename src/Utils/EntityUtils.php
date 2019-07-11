@@ -17,7 +17,7 @@ class EntityUtils
      *
      * @return array
      */
-    public static function collectIds(array $entities)
+    public static function collectIds(array $entities): array
     {
         $ids = [];
         foreach ($entities as $entity) {
@@ -27,7 +27,7 @@ class EntityUtils
         return $ids;
     }
 
-    public static function isUuid($id)
+    public static function isUuid($id): bool
     {
         return 1 === preg_match('/' . self::VALID_UUID_PATTERN . '/', $id);
     }
