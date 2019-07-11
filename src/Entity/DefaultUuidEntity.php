@@ -12,19 +12,15 @@ class DefaultUuidEntity extends GeneratedIntegerIdEntity implements UuidEntityIn
      */
     private $uuid;
 
-    /**
-     * @return string
-     */
     public function getUuid(): ?string
     {
         return $this->uuid;
     }
 
-    /**
-     * @param string $uuid
-     */
-    public function setUuid(string $uuid)
+    public function setUuid(string $uuid): self
     {
         $this->uuid = $uuid;
+
+        return $this;
     }
 }

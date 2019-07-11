@@ -3,67 +3,53 @@
 namespace Dontdrinkandroot\Service;
 
 use Dontdrinkandroot\DoctrineOrmTestCase;
-use Dontdrinkandroot\Entity\AssignedIdExampleEntity;
-use Dontdrinkandroot\Entity\GeneratedIdExampleEntity;
-use Dontdrinkandroot\Repository\AssignedIdExampleEntityRepository;
-use Dontdrinkandroot\Repository\GeneratedIdExampleEntityRepository;
+use Dontdrinkandroot\Entity\ExampleDefaultUuidEntity;
+use Dontdrinkandroot\Fixtures\ExampleDefaultUuidEntities;
+use Dontdrinkandroot\Repository\CrudRepository;
 
 class RepositoryCrudServiceTest extends DoctrineOrmTestCase
 {
     /**
+     * @var RepositoryCrudService
+     */
+    private $service;
+
+    /**
      * {@inheritdoc}
      */
-    protected function getDataSet()
+    public function setUp(): void
     {
-        return $this->createXMLDataSet(realpath(__DIR__ . '/../Repository/dataset.xml'));
+        parent::setUp();
+        $this->service = new RepositoryCrudService(
+            new CrudRepository(
+                $this->entityManager,
+                $this->entityManager->getClassMetadata(ExampleDefaultUuidEntity::class)
+            )
+        );
     }
 
     public function testFindAll()
     {
-        $entityService = $this->getEntityService();
-        $entities = $entityService->findAll();
-        $this->assertCount(3, $entities);
+        $this->loadFixtures([ExampleDefaultUuidEntities::class]);
+
+        $entities = $this->service->findAll();
+        $this->assertCount(6, $entities);
     }
 
     public function testCreate()
     {
-        $entityService = $this->getEntityService();
+        $entity = (new ExampleDefaultUuidEntity())
+            ->setName('newly saved entity')
+            ->setUuid('1e216c84-d4bd-4212-8a0a-de4874784227');
 
-        $entity = new GeneratedIdExampleEntity();
-        $entity->setName('newly saved entity');
-
-        /** @var GeneratedIdExampleEntity $entity */
-        $entity = $entityService->create($entity);
+        /** @var ExampleDefaultUuidEntity $entity */
+        $entity = $this->service->create($entity);
         $this->assertNotNull($entity->getId());
 
-        $this->assertCount(4, $entityService->findAll());
+        $this->assertCount(1, $this->service->findAll());
 
-        $refetchedEntity = $entityService->find($entity->getId());
+        $refetchedEntity = $this->service->find($entity->getId());
         $this->assertNotNull($refetchedEntity);
         $this->assertEquals($entity, $refetchedEntity);
-    }
-
-    /**
-     * @return RepositoryCrudService
-     */
-    protected function getEntityService()
-    {
-        return new RepositoryCrudService($this->getGeneratedIdExampleEntityRepository());
-    }
-
-    /**
-     * @return GeneratedIdExampleEntityRepository
-     */
-    protected function getGeneratedIdExampleEntityRepository()
-    {
-        return $this->entityManager->getRepository(GeneratedIdExampleEntity::class);
-    }
-
-    /**
-     * @return AssignedIdExampleEntityRepository
-     */
-    protected function getAssignedIdExampleEntityRepository()
-    {
-        return $this->entityManager->getRepository(AssignedIdExampleEntity::class);
     }
 }

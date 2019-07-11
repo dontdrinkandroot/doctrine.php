@@ -2,9 +2,8 @@
 
 namespace Dontdrinkandroot\Repository;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
@@ -17,18 +16,12 @@ class TransactionalCrudRepository extends CrudRepository
      */
     private $transactionManager;
 
-    /**
-     * @param ManagerRegistry|EntityManagerInterface $registryOrManager
-     * @param string|ClassMetadata                   $classNameOrMetadata
-     * @param TransactionManager|null                $transactionManager
-     */
     public function __construct(
-        $registryOrManager,
-        $classNameOrMetadata,
+        EntityManagerInterface $em,
+        Mapping\ClassMetadata $class,
         ?TransactionManager $transactionManager = null
     ) {
-        parent::__construct($registryOrManager, $classNameOrMetadata);
-
+        parent::__construct($em, $class);
         if (null === $transactionManager) {
             $this->transactionManager = new TransactionManager($this->getEntityManager());
         } else {
@@ -124,8 +117,13 @@ class TransactionalCrudRepository extends CrudRepository
         );
     }
 
-    public function getTransactionManager()
+    public function getTransactionManager(): TransactionManager
     {
         return $this->transactionManager;
+    }
+
+    public function setTransactionManager(TransactionManager $transactionManager): void
+    {
+        $this->transactionManager = $transactionManager;
     }
 }

@@ -1,0 +1,6 @@
+Dontdrinkandroot\Entity\ExampleDefaultUuidEntity:
+    type: entity
+    repositoryClass: Dontdrinkandroot\Repository\GeneratedIdExampleEntityRepository
+    fields:
+        name:
+            type: string

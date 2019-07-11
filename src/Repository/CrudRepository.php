@@ -2,10 +2,7 @@
 
 namespace Dontdrinkandroot\Repository;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Dontdrinkandroot\Entity\EntityInterface;
@@ -16,27 +13,6 @@ use Dontdrinkandroot\Entity\EntityInterface;
 class CrudRepository extends EntityRepository implements CrudRepositoryInterface
 {
     /**
-     * @param ManagerRegistry|EntityManagerInterface $registryOrManager
-     * @param string|ClassMetadata                   $classNameOrMetadata
-     */
-    public function __construct($registryOrManager, $classNameOrMetadata)
-    {
-        if ($registryOrManager instanceof ManagerRegistry) {
-            $manager = $registryOrManager->getManagerForClass($classNameOrMetadata);
-        } else {
-            $manager = $registryOrManager;
-        }
-
-        if ($classNameOrMetadata instanceof ClassMetadata) {
-            $classMetadata = $classNameOrMetadata;
-        } else {
-            $classMetadata = $manager->getClassMetadata($classNameOrMetadata);
-        }
-
-        parent::__construct($manager, $classMetadata);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function persist(object $entity, bool $flush = true): object
@@ -44,7 +20,7 @@ class CrudRepository extends EntityRepository implements CrudRepositoryInterface
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
-            $this->getEntityManager()->flush($entity);
+            $this->flush($entity);
         }
 
         return $entity;
@@ -58,7 +34,7 @@ class CrudRepository extends EntityRepository implements CrudRepositoryInterface
         $entity = $this->getEntityManager()->merge($entity);
 
         if ($flush) {
-            $this->getEntityManager()->flush($entity);
+            $this->flush($entity);
         }
 
         return $entity;
@@ -98,7 +74,7 @@ class CrudRepository extends EntityRepository implements CrudRepositoryInterface
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {
-            $this->getEntityManager()->flush($entity);
+            $this->flush($entity);
         }
     }
 
@@ -114,7 +90,7 @@ class CrudRepository extends EntityRepository implements CrudRepositoryInterface
         }
 
         if ($flush) {
-            $this->getEntityManager()->flush();
+            $this->flush();
         }
     }
 
