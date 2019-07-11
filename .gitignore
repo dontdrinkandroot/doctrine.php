@@ -2,4 +2,6 @@
 /vendor/
 /bin/*
 /composer.lock
-/coverage.clover
+coverage.clover
+coverage.clover.xml
+log.junit.xml

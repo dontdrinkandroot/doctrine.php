@@ -6,7 +6,7 @@ use Dontdrinkandroot\DoctrineOrmTestCase;
 use Dontdrinkandroot\Entity\AssignedIdExampleEntity;
 use Dontdrinkandroot\Entity\GeneratedIdExampleEntity;
 
-class OrmEntityRepositoryTest extends DoctrineOrmTestCase
+class CrudRepositoryTest extends DoctrineOrmTestCase
 {
     /**
      * {@inheritdoc}
@@ -104,7 +104,7 @@ class OrmEntityRepositoryTest extends DoctrineOrmTestCase
         $generatedIdExampleEntityRepository = $this->getGeneratedIdExampleEntityRepository();
         $this->assertCount(3, $generatedIdExampleEntityRepository->findAll());
         $entity = $generatedIdExampleEntityRepository->find(1);
-        $generatedIdExampleEntityRepository->remove($entity);
+        $generatedIdExampleEntityRepository->remove($entity, true);
         $this->assertCount(2, $generatedIdExampleEntityRepository->findAll());
     }
 
@@ -136,7 +136,7 @@ class OrmEntityRepositoryTest extends DoctrineOrmTestCase
         $this->assertCount(3, $generatedIdExampleEntityRepository->findAll());
         $entity = $generatedIdExampleEntityRepository->find(2);
         $this->assertNotNull($entity);
-        $generatedIdExampleEntityRepository->removeById(2);
+        $generatedIdExampleEntityRepository->removeById(2, true);
         $this->assertCount(2, $generatedIdExampleEntityRepository->findAll());
         $this->assertNull($generatedIdExampleEntityRepository->find(2));
     }

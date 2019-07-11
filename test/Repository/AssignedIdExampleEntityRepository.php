@@ -2,6 +2,6 @@
 
 namespace Dontdrinkandroot\Repository;
 
-class AssignedIdExampleEntityRepository extends OrmEntityRepository
+class AssignedIdExampleEntityRepository extends CrudRepository
 {
 }

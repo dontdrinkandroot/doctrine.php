@@ -8,7 +8,7 @@ use Dontdrinkandroot\Entity\GeneratedIdExampleEntity;
 use Dontdrinkandroot\Repository\AssignedIdExampleEntityRepository;
 use Dontdrinkandroot\Repository\GeneratedIdExampleEntityRepository;
 
-class EntityServiceTest extends DoctrineOrmTestCase
+class RepositoryCrudServiceTest extends DoctrineOrmTestCase
 {
     /**
      * {@inheritdoc}
@@ -21,33 +21,34 @@ class EntityServiceTest extends DoctrineOrmTestCase
     public function testFindAll()
     {
         $entityService = $this->getEntityService();
-        $entities = $entityService->listAll();
+        $entities = $entityService->findAll();
         $this->assertCount(3, $entities);
     }
 
-    public function testSave()
+    public function testCreate()
     {
         $entityService = $this->getEntityService();
 
         $entity = new GeneratedIdExampleEntity();
         $entity->setName('newly saved entity');
 
-        $entity = $entityService->save($entity);
+        /** @var GeneratedIdExampleEntity $entity */
+        $entity = $entityService->create($entity);
         $this->assertNotNull($entity->getId());
 
-        $this->assertCount(4, $entityService->listAll());
+        $this->assertCount(4, $entityService->findAll());
 
-        $refetchedEntity = $entityService->fetchById($entity->getId());
+        $refetchedEntity = $entityService->find($entity->getId());
         $this->assertNotNull($refetchedEntity);
         $this->assertEquals($entity, $refetchedEntity);
     }
 
     /**
-     * @return EntityService
+     * @return RepositoryCrudService
      */
     protected function getEntityService()
     {
-        return new EntityService($this->getGeneratedIdExampleEntityRepository());
+        return new RepositoryCrudService($this->getGeneratedIdExampleEntityRepository());
     }
 
     /**
