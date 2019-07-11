@@ -55,6 +55,8 @@ interface CrudServiceInterface
      * @param object $associatedEntity
      *
      * @return object
+     *
+     * @deprecated To be removed
      */
     public function createAssociation($entity, string $fieldName, $associatedEntity);
 
@@ -62,6 +64,8 @@ interface CrudServiceInterface
      * @param object     $entity
      * @param string     $fieldName
      * @param string|int $id
+     *
+     * @deprecated To be removed
      */
     public function addAssociation($entity, string $fieldName, $id);
 
@@ -69,6 +73,8 @@ interface CrudServiceInterface
      * @param object          $entity
      * @param string          $fieldName
      * @param string|int|null $id
+     *
+     * @deprecated To be removed
      */
     public function removeAssociation($entity, string $fieldName, $id = null);
 }

@@ -6,10 +6,8 @@ use Doctrine\ORM\Query;
 
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
- *
- * @deprecated use UuidCrudRepository or TransactionalUuidCrudRepository instead
  */
-class OrmUuidEntityRepository extends OrmEntityRepository implements UuidEntityRepositoryInterface
+class TransactionalUuidCrudRepository extends TransactionalCrudRepository implements UuidCrudRepositoryInterface
 {
     /**
      * {@inheritdoc}

@@ -2,17 +2,11 @@
 
 namespace Dontdrinkandroot\Repository;
 
-use Dontdrinkandroot\Entity\UuidEntityInterface;
-
 /**
- * @author Philip Washington Sorst <philip@sorst.net>
+ * @author     Philip Washington Sorst <philip@sorst.net>
+ *
+ * @deprecated Use UuidCrudRepositoryInterface instead
  */
-interface UuidEntityRepositoryInterface extends EntityRepositoryInterface
+interface UuidEntityRepositoryInterface extends UuidCrudRepositoryInterface
 {
-    /**
-     * @param string $uuid
-     *
-     * @return UuidEntityInterface|null
-     */
-    public function findByUuid($uuid);
 }
