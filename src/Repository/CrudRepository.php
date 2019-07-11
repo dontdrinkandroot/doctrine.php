@@ -18,13 +18,9 @@ class CrudRepository extends EntityRepository implements CrudRepositoryInterface
     /**
      * @param ManagerRegistry|EntityManagerInterface $registryOrManager
      * @param string|ClassMetadata                   $classNameOrMetadata
-     * @param TransactionManager|null                $transactionManager
      */
-    public function __construct(
-        $registryOrManager,
-        $classNameOrMetadata,
-        ?TransactionManager $transactionManager = null
-    ) {
+    public function __construct($registryOrManager, $classNameOrMetadata)
+    {
         if ($registryOrManager instanceof ManagerRegistry) {
             $manager = $registryOrManager->getManagerForClass($classNameOrMetadata);
         } else {

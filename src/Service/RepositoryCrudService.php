@@ -3,17 +3,22 @@
 namespace Dontdrinkandroot\Service;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Dontdrinkandroot\Repository\CrudRepositoryInterface;
+use RuntimeException;
 
-class DelegatedCrudService implements CrudServiceInterface
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
+class RepositoryCrudService implements CrudServiceInterface
 {
     /**
-     * @var CrudServiceInterface
+     * @var CrudRepositoryInterface
      */
-    private $delegate;
+    private $repository;
 
-    public function __construct(CrudServiceInterface $delegate)
+    public function __construct(CrudRepositoryInterface $repository)
     {
-        $this->delegate = $delegate;
+        $this->repository = $repository;
     }
 
     /**
@@ -21,15 +26,15 @@ class DelegatedCrudService implements CrudServiceInterface
      */
     public function find($id)
     {
-        return $this->delegate->find($id);
+        return $this->getRepository()->find($id);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findAll(): array
+    public function findAll()
     {
-        return $this->delegate->findAll();
+        return $this->getRepository()->findAll();
     }
 
     /**
@@ -37,7 +42,7 @@ class DelegatedCrudService implements CrudServiceInterface
      */
     public function findAllPaginated(int $page = 1, int $perPage = 50): Paginator
     {
-        return $this->delegate->findAllPaginated($page, $perPage);
+        return $this->getRepository()->findPaginatedBy($page, $perPage);
     }
 
     /**
@@ -45,7 +50,7 @@ class DelegatedCrudService implements CrudServiceInterface
      */
     public function create(object $entity): object
     {
-        return $this->delegate->create($entity);
+        return $this->getRepository()->persist($entity, true);
     }
 
     /**
@@ -53,7 +58,9 @@ class DelegatedCrudService implements CrudServiceInterface
      */
     public function update(object $entity): object
     {
-        return $this->delegate->update($entity);
+        $this->getRepository()->flush($entity);
+
+        return $entity;
     }
 
     /**
@@ -61,7 +68,7 @@ class DelegatedCrudService implements CrudServiceInterface
      */
     public function remove(object $entity): void
     {
-        $this->delegate->remove($entity);
+        $this->getRepository()->remove($entity, true);
     }
 
     /**
@@ -69,7 +76,7 @@ class DelegatedCrudService implements CrudServiceInterface
      */
     public function findAssociationPaginated($entity, string $association, int $page = 1, $perPage = 50)
     {
-        return $this->delegate->findAssociationPaginated($entity, $association, $page, $perPage);
+        throw new RuntimeException('Not implemented');
     }
 
     /**
@@ -77,7 +84,7 @@ class DelegatedCrudService implements CrudServiceInterface
      */
     public function createAssociation($entity, string $fieldName, $associatedEntity)
     {
-        return $this->delegate->createAssociation($entity, $fieldName, $associatedEntity);
+        throw new RuntimeException('Not implemented');
     }
 
     /**
@@ -85,7 +92,7 @@ class DelegatedCrudService implements CrudServiceInterface
      */
     public function addAssociation($entity, string $fieldName, $id)
     {
-        $this->delegate->addAssociation($entity, $fieldName, $id);
+        throw new RuntimeException('Not implemented');
     }
 
     /**
@@ -93,14 +100,11 @@ class DelegatedCrudService implements CrudServiceInterface
      */
     public function removeAssociation($entity, string $fieldName, $id = null)
     {
-        $this->delegate->removeAssociation($entity, $fieldName, $id);
+        throw new RuntimeException('Not implemented');
     }
 
-    /**
-     * @return CrudServiceInterface
-     */
-    protected function getDelegate()
+    protected function getRepository(): CrudRepositoryInterface
     {
-        return $this->delegate;
+        return $this->repository;
     }
 }

@@ -8,6 +8,8 @@ use Dontdrinkandroot\Repository\TransactionManager;
 
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
+ *
+ * @deprecated
  */
 class TransactionalDoctrineCrudService extends DoctrineCrudService
 {

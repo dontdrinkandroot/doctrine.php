@@ -12,7 +12,7 @@ class TransactionalUuidCrudRepository extends TransactionalCrudRepository implem
     /**
      * {@inheritdoc}
      */
-    public function findByUuid(string $uuid): object
+    public function findByUuid(string $uuid): ?object
     {
         return $this->getTransactionManager()->transactional(
             function () use ($uuid) {

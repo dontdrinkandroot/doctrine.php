@@ -10,34 +10,13 @@ interface CrudServiceInterface
 
     public function findAll();
 
-    /**
-     * @param int $page
-     * @param int $perPage
-     *
-     * @return Paginator|array
-     */
-    public function findAllPaginated(int $page = 1, int $perPage = 50);
+    public function findAllPaginated(int $page = 1, int $perPage = 50): Paginator;
 
-    /**
-     * @param object $entity
-     *
-     * @return object
-     */
-    public function create($entity);
+    public function create(object $entity): object;
 
-    /**
-     * @param object $entity
-     *
-     * @return object
-     */
-    public function update($entity);
+    public function update(object $entity): object;
 
-    /**
-     * @param object $entity
-     *
-     * @return object mixed
-     */
-    public function remove($entity);
+    public function remove(object $entity): void;
 
     /**
      * @param object $entity
@@ -46,6 +25,8 @@ interface CrudServiceInterface
      * @param int    $perPage
      *
      * @return Paginator|array
+     *
+     * @deprecated To be removed
      */
     public function findAssociationPaginated($entity, string $association, int $page = 1, $perPage = 50);
 

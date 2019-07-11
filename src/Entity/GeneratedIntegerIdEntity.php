@@ -14,10 +14,6 @@ class GeneratedIntegerIdEntity implements IntegerIdEntityInterface
      */
     private $id;
 
-    public function __construct()
-    {
-    }
-
     /**
      * @return int
      */

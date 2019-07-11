@@ -2,6 +2,9 @@
 
 namespace Dontdrinkandroot\Service;
 
+/**
+ * @deprecated
+ */
 class DoctrineUuidCrudService extends DoctrineCrudService
 {
     protected $uuidField = 'uuid';

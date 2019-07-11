@@ -9,6 +9,8 @@ use Dontdrinkandroot\Repository\EntityRepositoryInterface;
 
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
+ *
+ * @deprecated
  */
 class EntityService implements EntityServiceInterface
 {

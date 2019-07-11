@@ -8,6 +8,8 @@ use Dontdrinkandroot\Repository\UuidEntityRepositoryInterface;
 
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
+ *
+ * @deprecated
  */
 class UuidEntityService extends EntityService implements UuidEntityServiceInterface
 {

@@ -13,6 +13,9 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
+/**
+ * @deprecated
+ */
 class DoctrineCrudService extends EntityRepository implements CrudServiceInterface
 {
     /**
@@ -63,12 +66,10 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
     /**
      * {@inheritdoc}
      */
-    public function create($entity, bool $flush = true)
+    public function create(object $entity): object
     {
         $this->getEntityManager()->persist($entity);
-        if ($flush) {
-            $this->getEntityManager()->flush($entity);
-        }
+        $this->getEntityManager()->flush($entity);
 
         return $entity;
     }
@@ -76,11 +77,9 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
     /**
      * {@inheritdoc}
      */
-    public function update($entity, bool $flush = false)
+    public function update(object $entity): object
     {
-        if ($flush || $this->isVersioned($entity)) {
-            $this->getEntityManager()->flush($entity);
-        }
+        $this->getEntityManager()->flush($entity);
 
         return $entity;
     }
@@ -95,12 +94,10 @@ class DoctrineCrudService extends EntityRepository implements CrudServiceInterfa
     /**
      * {@inheritdoc}
      */
-    public function remove($entity, bool $flush = false)
+    public function remove(object $entity): void
     {
         $this->getEntityManager()->remove($entity);
-        if ($flush) {
-            $this->getEntityManager()->flush($entity);
-        }
+        $this->getEntityManager()->flush($entity);
     }
 
     /**
