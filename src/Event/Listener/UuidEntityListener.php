@@ -11,7 +11,7 @@ use Ramsey\Uuid\Uuid;
  */
 class UuidEntityListener
 {
-    public function prePersist(LifecycleEventArgs $args)
+    public function prePersist(LifecycleEventArgs $args): void
     {
         $entity = $args->getEntity();
 

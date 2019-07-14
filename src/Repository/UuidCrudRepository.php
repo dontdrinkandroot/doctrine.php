@@ -2,6 +2,8 @@
 
 namespace Dontdrinkandroot\Repository;
 
+use Doctrine\ORM\Query;
+
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
@@ -14,7 +16,7 @@ class UuidCrudRepository extends CrudRepository implements UuidCrudRepositoryInt
         return $query->getOneOrNullResult();
     }
 
-    protected function createFindByUuidQuery($uuid)
+    protected function createFindByUuidQuery($uuid): Query
     {
         $queryBuilder = $this->createQueryBuilder('entity');
         $queryBuilder->where('entity.uuid = :uuid');

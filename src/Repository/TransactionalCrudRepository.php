@@ -59,7 +59,7 @@ class TransactionalCrudRepository extends CrudRepository
     public function remove(object $entity, bool $flush = false): void
     {
         $this->transactionManager->transactional(
-            function () use ($entity, $flush) {
+            function () use ($entity, $flush): void {
                 parent::remove($entity, $flush);
             }
         );
@@ -71,7 +71,7 @@ class TransactionalCrudRepository extends CrudRepository
     public function removeById($id, bool $flush = false): void
     {
         $this->transactionManager->transactional(
-            function () use ($id, $flush) {
+            function () use ($id, $flush): void {
                 parent::removeById($id, $flush);
             }
         );
@@ -83,7 +83,7 @@ class TransactionalCrudRepository extends CrudRepository
     public function removeAll(bool $flush = false, bool $iterate = true): void
     {
         $this->transactionManager->transactional(
-            function () use ($flush, $iterate) {
+            function () use ($flush, $iterate): void {
                 parent::removeAll($flush, $iterate);
             }
         );
@@ -99,7 +99,7 @@ class TransactionalCrudRepository extends CrudRepository
         array $orderBy = null
     ): Paginator {
         return $this->transactionManager->transactional(
-            function () use ($page, $perPage, $criteria, $orderBy) {
+            function () use ($page, $perPage, $criteria, $orderBy): Paginator {
                 return parent::findPaginatedBy($page, $perPage, $criteria, $orderBy);
             }
         );
@@ -111,7 +111,7 @@ class TransactionalCrudRepository extends CrudRepository
     public function countAll(): int
     {
         return $this->transactionManager->transactional(
-            function () {
+            function (): int {
                 return parent::countAll();
             }
         );

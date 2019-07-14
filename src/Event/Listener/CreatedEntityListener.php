@@ -11,7 +11,7 @@ use Dontdrinkandroot\Entity\CreatedEntityInterface;
  */
 class CreatedEntityListener
 {
-    public function prePersist(LifecycleEventArgs $args)
+    public function prePersist(LifecycleEventArgs $args): void
     {
         $entity = $args->getEntity();
 

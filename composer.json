@@ -38,7 +38,8 @@
         "scrutinizer/ocular": "1.6.0",
         "doctrine/data-fixtures": "^1.1",
         "phpunit/phpunit": "^8.2",
-        "symfony/yaml": "^4.0"
+        "symfony/yaml": "^4.0",
+        "rector/rector": "^0.5.7"
     },
     "suggest": {
         "doctrine/data-fixtures": "For data fixture testing"

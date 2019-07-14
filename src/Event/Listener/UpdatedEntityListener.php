@@ -11,17 +11,17 @@ use Dontdrinkandroot\Entity\UpdatedEntityInterface;
  */
 class UpdatedEntityListener
 {
-    public function prePersist(LifecycleEventArgs $args)
+    public function prePersist(LifecycleEventArgs $args): void
     {
         $this->checkAndSetUpdated($args);
     }
 
-    public function preUpdate(LifecycleEventArgs $args)
+    public function preUpdate(LifecycleEventArgs $args): void
     {
         $this->checkAndSetUpdated($args);
     }
 
-    protected function checkAndSetUpdated(LifecycleEventArgs $args)
+    protected function checkAndSetUpdated(LifecycleEventArgs $args): void
     {
         $entity = $args->getEntity();
 

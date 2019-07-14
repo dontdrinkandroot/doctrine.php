@@ -69,7 +69,7 @@ class CrudRepository extends EntityRepository implements CrudRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function remove(object $entity, bool $flush = false)
+    public function remove(object $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -81,7 +81,7 @@ class CrudRepository extends EntityRepository implements CrudRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function removeAll(bool $flush = false, bool $iterate = true)
+    public function removeAll(bool $flush = false, bool $iterate = true): void
     {
         if ($iterate) {
             $this->removeAllByIterating();
@@ -132,12 +132,10 @@ class CrudRepository extends EntityRepository implements CrudRepositoryInterface
             ->select('count(entity)')
             ->from($this->getClassName(), 'entity');
 
-        $result = $queryBuilder->getQuery()->getSingleScalarResult();
-
-        return $result;
+        return $queryBuilder->getQuery()->getSingleScalarResult();
     }
 
-    protected function removeAllByIterating(int $batchSize = 100)
+    protected function removeAllByIterating(int $batchSize = 100): void
     {
         $entities = $this->findAll();
         $count = 0;
@@ -151,7 +149,7 @@ class CrudRepository extends EntityRepository implements CrudRepositoryInterface
         }
     }
 
-    protected function removeAllByQuery()
+    protected function removeAllByQuery(): void
     {
         $queryBuilder = $this->createQueryBuilder('entity');
         $queryBuilder->delete();

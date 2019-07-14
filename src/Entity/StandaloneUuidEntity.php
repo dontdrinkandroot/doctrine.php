@@ -23,7 +23,7 @@ class StandaloneUuidEntity implements EntityInterface, UuidEntityInterface
     /**
      * @param string $uuid
      */
-    public function setUuid(string $uuid)
+    public function setUuid(string $uuid): void
     {
         $this->uuid = $uuid;
     }
@@ -31,7 +31,7 @@ class StandaloneUuidEntity implements EntityInterface, UuidEntityInterface
     /**
      * @return mixed
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->uuid;
     }
