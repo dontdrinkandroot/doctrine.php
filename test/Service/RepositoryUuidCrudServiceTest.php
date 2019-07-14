@@ -67,5 +67,7 @@ class RepositoryUuidCrudServiceTest extends DoctrineOrmTestCase
         /** @var ExampleDefaultUuidEntity $entity */
         $entity = $this->service->findByUuid(ExampleDefaultUuidEntities::UUID_1);
         $this->assertEquals('Updated', $entity->getName());
+
+        $this->assertNotEquals($entity->getCreated(), $entity->getUpdated());
     }
 }

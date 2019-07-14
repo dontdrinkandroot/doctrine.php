@@ -29,7 +29,8 @@
         "php": ">=7.2",
         "psr/log": "~1.0",
         "doctrine/orm": "^2.5",
-        "doctrine/common": "^2.7"
+        "doctrine/common": "^2.7",
+        "ramsey/uuid": "^3.8"
     },
     "require-dev": {
         "ext-pdo": "*",

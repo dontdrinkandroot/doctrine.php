@@ -6,11 +6,16 @@ use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\ReferenceRepository;
+use Doctrine\Common\EventManager;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\Setup;
+use Dontdrinkandroot\Event\Listener\CreatedEntityListener;
+use Dontdrinkandroot\Event\Listener\UpdatedEntityListener;
+use Dontdrinkandroot\Event\Listener\UuidEntityListener;
 use PDO;
 use PHPUnit\Framework\TestCase;
 
@@ -37,7 +42,13 @@ abstract class DoctrineOrmTestCase extends TestCase
         $connectionParams = [
             'pdo' => $this->pdo
         ];
-        $this->entityManager = EntityManager::create($connectionParams, $config);
+
+        $eventManager = new EventManager();
+        $eventManager->addEventListener([Events::prePersist], new CreatedEntityListener());
+        $eventManager->addEventListener([Events::prePersist, Events::preUpdate], new UpdatedEntityListener());
+        $eventManager->addEventListener([Events::prePersist], new UuidEntityListener());
+
+        $this->entityManager = EntityManager::create($connectionParams, $config, $eventManager);
         $classes = $this->entityManager->getMetadataFactory()->getAllMetadata();
         $tool = new SchemaTool($this->entityManager);
         $tool->createSchema($classes);

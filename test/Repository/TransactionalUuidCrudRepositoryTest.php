@@ -42,12 +42,16 @@ class TransactionalUuidCrudRepositoryTest extends DoctrineOrmTestCase
     public function testPersist()
     {
         $entity = (new ExampleDefaultUuidEntity())
-            ->setName('New Entity')
-            ->setUuid('e4d10009-673e-4be7-b2aa-8eb2449c3194');
+            ->setName('New Entity');
 
         /** @var ExampleDefaultUuidEntity $entity */
         $entity = $this->repository->persist($entity);
         $this->assertNotNull($entity->getId());
+
+        /* Make sure listeners were called */
+        $this->assertNotNull($entity->getUuid());
+        $this->assertNotNull($entity->getCreated());
+        $this->assertNotNull($entity->getUpdated());
     }
 
     public function testRemove()
