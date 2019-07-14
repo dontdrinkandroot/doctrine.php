@@ -2,9 +2,9 @@ language: php
 
 matrix:
     include:
-        -   php: 7.2
+        -   php: "7.2"
             env: dependencies=lowest
-        -   php: 7.2
+        -   php: "7.2"
             env: dependencies=highest
 
 cache:
@@ -18,7 +18,7 @@ before_script:
     - if [ "$dependencies" = "highest" ]; then composer update -n; fi;
 
 script:
-    - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+    - vendor/bin/phpunit --coverage-clover=coverage.clover.xml
 
 after_script:
-    - php vendor/bin/ocular code-coverage:upload --format=php-clover coverage.clover
+    - php vendor/bin/ocular code-coverage:upload --format=php-clover coverage.clover.xml
