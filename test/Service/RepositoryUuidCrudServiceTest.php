@@ -5,12 +5,12 @@ namespace Dontdrinkandroot\Service;
 use Dontdrinkandroot\DoctrineOrmTestCase;
 use Dontdrinkandroot\Entity\ExampleDefaultUuidEntity;
 use Dontdrinkandroot\Fixtures\ExampleDefaultUuidEntities;
-use Dontdrinkandroot\Repository\CrudRepository;
+use Dontdrinkandroot\Repository\UuidCrudRepository;
 
-class RepositoryCrudServiceTest extends DoctrineOrmTestCase
+class RepositoryUuidCrudServiceTest extends DoctrineOrmTestCase
 {
     /**
-     * @var RepositoryCrudService
+     * @var UuidCrudServiceInterface
      */
     private $service;
 
@@ -20,8 +20,8 @@ class RepositoryCrudServiceTest extends DoctrineOrmTestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->service = new RepositoryCrudService(
-            new CrudRepository(
+        $this->service = new RepositoryUuidCrudService(
+            new UuidCrudRepository(
                 $this->entityManager,
                 $this->entityManager->getClassMetadata(ExampleDefaultUuidEntity::class)
             )
@@ -51,5 +51,21 @@ class RepositoryCrudServiceTest extends DoctrineOrmTestCase
         $refetchedEntity = $this->service->find($entity->getId());
         $this->assertNotNull($refetchedEntity);
         $this->assertEquals($entity, $refetchedEntity);
+    }
+
+    public function testUpdate()
+    {
+        $this->loadFixtures([ExampleDefaultUuidEntities::class]);
+
+        /** @var ExampleDefaultUuidEntity $entity */
+        $entity = $this->service->findByUuid(ExampleDefaultUuidEntities::UUID_1);
+        $this->assertEquals('One', $entity->getName());
+
+        $entity->setName('Updated');
+        $this->service->update($entity);
+
+        /** @var ExampleDefaultUuidEntity $entity */
+        $entity = $this->service->findByUuid(ExampleDefaultUuidEntities::UUID_1);
+        $this->assertEquals('Updated', $entity->getName());
     }
 }
