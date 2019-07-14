@@ -3,6 +3,8 @@
 namespace Dontdrinkandroot\Repository;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
+use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -27,7 +29,7 @@ class TransactionManager
         $this->logger = new NullLogger();
     }
 
-    public function beginTransaction()
+    public function beginTransaction(): void
     {
         $this->entityManager->beginTransaction();
     }
@@ -54,7 +56,7 @@ class TransactionManager
         return $flush;
     }
 
-    public function rollbackTransaction()
+    public function rollbackTransaction(): void
     {
         /* No active transaction */
         if (!$this->isInTransaction()) {
@@ -66,22 +68,15 @@ class TransactionManager
         $this->entityManager->rollback();
     }
 
-    public function isInTransaction()
+    public function isInTransaction(): bool
     {
-        $hasTransaction = 0 !== $this->entityManager->getConnection()->getTransactionNestingLevel();
-
-        return ($hasTransaction);
+        return 0 !== $this->entityManager->getConnection()->getTransactionNestingLevel();
     }
 
-    /**
-     * @param callable $func
-     *
-     * @return mixed
-     */
-    public function transactional($func)
+    public function transactional(Callable $func)
     {
         if (!is_callable($func)) {
-            throw new \InvalidArgumentException('Expected argument of type "callable", got "' . gettype($func) . '"');
+            throw new InvalidArgumentException('Expected argument of type "callable", got "' . gettype($func) . '"');
         }
 
         $this->beginTransaction();
@@ -92,18 +87,14 @@ class TransactionManager
             $this->commitTransaction();
 
             return $return;
-        } catch (\Exception $e) {
-            $this->entityManager->close();
+        } catch (Exception $e) {
             $this->rollbackTransaction();
 
             throw $e;
         }
     }
 
-    /**
-     * @param LoggerInterface $logger
-     */
-    public function setLogger(LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
     }
