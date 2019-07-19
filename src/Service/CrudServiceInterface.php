@@ -17,4 +17,6 @@ interface CrudServiceInterface
     public function update(object $entity): object;
 
     public function remove(object $entity): void;
+
+    public function save(object $entity): object;
 }

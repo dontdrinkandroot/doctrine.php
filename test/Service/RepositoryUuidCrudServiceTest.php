@@ -70,4 +70,31 @@ class RepositoryUuidCrudServiceTest extends DoctrineOrmTestCase
 
         $this->assertNotEquals($entity->getCreated(), $entity->getUpdated());
     }
+
+    public function testSaveExisting()
+    {
+        $this->loadFixtures([ExampleDefaultUuidEntities::class]);
+        /** @var ExampleDefaultUuidEntity $entity */
+        $entity = $this->service->findByUuid(ExampleDefaultUuidEntities::UUID_1);
+        $this->assertEquals('One', $entity->getName());
+
+        $entity->setName('Updated');
+        $this->service->save($entity);
+
+        /** @var ExampleDefaultUuidEntity $entity */
+        $entity = $this->service->findByUuid(ExampleDefaultUuidEntities::UUID_1);
+        $this->assertEquals('Updated', $entity->getName());
+    }
+
+    public function testSaveNew()
+    {
+        $entity = new ExampleDefaultUuidEntity();
+        $entity->setName('New');
+
+        $entity = $this->service->save($entity);
+
+        /** @var ExampleDefaultUuidEntity $entity */
+        $entity = $this->service->findByUuid($entity->getUuid());
+        $this->assertEquals('New', $entity->getName());
+    }
 }

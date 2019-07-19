@@ -65,6 +65,14 @@ class RepositoryCrudService implements CrudServiceInterface
     /**
      * {@inheritdoc}
      */
+    public function save(object $entity): object
+    {
+        return $this->getRepository()->merge($entity, true);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function remove(object $entity): void
     {
         $this->getRepository()->remove($entity, true);

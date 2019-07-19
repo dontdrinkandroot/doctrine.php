@@ -64,6 +64,14 @@ class DelegatedCrudService implements CrudServiceInterface
         $this->delegate->remove($entity);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function save(object $entity): object
+    {
+        return $this->delegate->save($entity);
+    }
+
     protected function getDelegate(): CrudServiceInterface
     {
         return $this->delegate;
