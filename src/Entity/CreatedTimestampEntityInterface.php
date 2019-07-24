@@ -7,7 +7,7 @@ namespace Dontdrinkandroot\Entity;
  */
 interface CreatedTimestampEntityInterface
 {
-    function getCreatedTimestamp(): ?int;
+    public function getCreatedTimestamp(): ?int;
 
-    function setCreatedTimestamp(int $timestamp);
+    public function setCreatedTimestamp(int $timestamp);
 }

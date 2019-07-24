@@ -7,7 +7,7 @@ namespace Dontdrinkandroot\Entity;
  */
 interface UpdatedTimestampEntityInterface
 {
-    function getUpdatedTimestamp(): ?int;
+    public function getUpdatedTimestamp(): ?int;
 
-    function setUpdatedTimestamp(int $timestamp);
+    public function setUpdatedTimestamp(int $timestamp);
 }
