@@ -5,6 +5,7 @@ namespace Dontdrinkandroot\Event\Listener;
 use DateTime;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Dontdrinkandroot\Entity\UpdatedEntityInterface;
+use Dontdrinkandroot\Entity\UpdatedTimestampEntityInterface;
 
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
@@ -29,6 +30,14 @@ class UpdatedEntityListener
             /** @var UpdatedEntityInterface $updatedEntity */
             $updatedEntity = $entity;
             $updatedEntity->setUpdated(new DateTime());
+        }
+
+        if (is_a($entity, UpdatedTimestampEntityInterface::class)) {
+            /** @var UpdatedTimestampEntityInterface $updatedTimestampEntity */
+            $updatedTimestampEntity = $entity;
+            if (null === $updatedTimestampEntity->getUpdatedTimestamp()) {
+                $updatedTimestampEntity->setUpdatedTimestamp((int)(microtime(true) * 1000));
+            }
         }
     }
 }

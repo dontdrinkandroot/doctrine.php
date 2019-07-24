@@ -5,6 +5,7 @@ namespace Dontdrinkandroot\Event\Listener;
 use DateTime;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Dontdrinkandroot\Entity\CreatedEntityInterface;
+use Dontdrinkandroot\Entity\CreatedTimestampEntityInterface;
 
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
@@ -20,6 +21,14 @@ class CreatedEntityListener
             $createdEntity = $entity;
             if (null === $createdEntity->getCreated()) {
                 $createdEntity->setCreated(new DateTime());
+            }
+        }
+
+        if (is_a($entity, CreatedTimestampEntityInterface::class)) {
+            /** @var CreatedTimestampEntityInterface $createdTimestampEntity */
+            $createdTimestampEntity = $entity;
+            if (null === $createdTimestampEntity->getCreatedTimestamp()) {
+                $createdTimestampEntity->setCreatedTimestamp((int)(microtime(true) * 1000));
             }
         }
     }
