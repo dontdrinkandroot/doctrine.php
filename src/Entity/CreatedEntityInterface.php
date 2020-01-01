@@ -2,18 +2,14 @@
 
 namespace Dontdrinkandroot\Entity;
 
+use DateTimeInterface;
+
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
 interface CreatedEntityInterface
 {
-    /**
-     * @return \DateTime|null
-     */
-    public function getCreated(): ?\DateTime;
+    public function getCreated(): ?DateTimeInterface;
 
-    /**
-     * @param \DateTime $created
-     */
-    public function setCreated(\DateTime $created);
+    public function setCreated(DateTimeInterface $created);
 }

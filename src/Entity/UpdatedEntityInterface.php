@@ -2,18 +2,14 @@
 
 namespace Dontdrinkandroot\Entity;
 
+use DateTimeInterface;
+
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
 interface UpdatedEntityInterface
 {
-    /**
-     * @return \DateTime|null
-     */
-    public function getUpdated(): ?\DateTime;
+    public function getUpdated(): ?DateTimeInterface;
 
-    /**
-     * @param \DateTime $updated
-     */
-    public function setUpdated(\DateTime $updated);
+    public function setUpdated(DateTimeInterface $updated);
 }
