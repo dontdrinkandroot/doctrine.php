@@ -15,9 +15,9 @@ class TransactionManagerTest extends DoctrineOrmTestCase
     public function testCommitAndFlush()
     {
         $transactionManager = new TransactionManager($this->entityManager);
-        $entity = (new ExampleDefaultUuidEntity())
-            ->setName('test')
-            ->setUuid(ExampleDefaultUuidEntities::UUID_1);
+        $entity = new ExampleDefaultUuidEntity();
+        $entity->setName('test');
+        $entity->setUuid(ExampleDefaultUuidEntities::UUID_1);
         $this->assertNull($entity->getId());
         $transactionManager->transactional(
             function () use ($entity) {
@@ -31,9 +31,9 @@ class TransactionManagerTest extends DoctrineOrmTestCase
     public function testNested()
     {
         $transactionManager = new TransactionManager($this->entityManager);
-        $entity = (new ExampleDefaultUuidEntity())
-            ->setName('test')
-            ->setUuid(ExampleDefaultUuidEntities::UUID_1);
+        $entity = new ExampleDefaultUuidEntity();
+        $entity->setName('test');
+        $entity->setUuid(ExampleDefaultUuidEntities::UUID_1);
         $this->assertNull($entity->getId());
         $transactionManager->transactional(
             function () use ($entity, $transactionManager) {
@@ -52,9 +52,9 @@ class TransactionManagerTest extends DoctrineOrmTestCase
     public function testRollback()
     {
         $transactionManager = new TransactionManager($this->entityManager);
-        $entity = (new ExampleDefaultUuidEntity())
-            ->setName('test')
-            ->setUuid(ExampleDefaultUuidEntities::UUID_1);
+        $entity = new ExampleDefaultUuidEntity();
+        $entity->setName('test');
+        $entity->setUuid(ExampleDefaultUuidEntities::UUID_1);
         $this->assertNull($entity->getId());
         try {
             $transactionManager->transactional(

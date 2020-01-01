@@ -7,20 +7,22 @@ namespace Dontdrinkandroot\Entity;
  */
 class DefaultUuidEntity extends GeneratedIntegerIdEntity implements UuidEntityInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $uuid;
 
+    /**
+     * {@inheritdoc}
+     */
     public function getUuid(): ?string
     {
         return $this->uuid;
     }
 
-    public function setUuid(string $uuid): self
+    /**
+     * {@inheritdoc}
+     */
+    public function setUuid(string $uuid): void
     {
         $this->uuid = $uuid;
-
-        return $this;
     }
 }

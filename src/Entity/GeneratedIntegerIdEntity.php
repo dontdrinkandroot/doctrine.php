@@ -9,22 +9,17 @@ use Doctrine\Common\Util\ClassUtils;
  */
 class GeneratedIntegerIdEntity implements IntegerIdEntityInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     private $id;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return bool
-     */
     public function isPersisted(): bool
     {
         return null !== $this->id;

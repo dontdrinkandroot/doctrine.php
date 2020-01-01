@@ -25,8 +25,13 @@ class EntityUtilsTest extends TestCase
     {
         $this->assertEquals([], EntityUtils::collectIds([]));
 
-        $entity1 = (new AssignedIdExampleEntity())->setName('Seven')->setId(7);
-        $entity2 = (new AssignedIdExampleEntity())->setName('Three')->setId(3);
+        $entity1 = new AssignedIdExampleEntity();
+        $entity1->setName('Seven');
+        $entity1->setId(7);
+
+        $entity2 = new AssignedIdExampleEntity();
+        $entity2->setName('Three');
+        $entity2->setId(3);
 
         $this->assertEquals([7, 3], EntityUtils::collectIds([$entity1, $entity2]));
     }

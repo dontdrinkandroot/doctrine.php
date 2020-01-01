@@ -38,9 +38,9 @@ class RepositoryUuidCrudServiceTest extends DoctrineOrmTestCase
 
     public function testCreate()
     {
-        $entity = (new ExampleDefaultUuidEntity())
-            ->setName('newly saved entity')
-            ->setUuid('1e216c84-d4bd-4212-8a0a-de4874784227');
+        $entity = new ExampleDefaultUuidEntity();
+        $entity->setName('newly saved entity');
+        $entity->setUuid('1e216c84-d4bd-4212-8a0a-de4874784227');
 
         /** @var ExampleDefaultUuidEntity $entity */
         $entity = $this->service->create($entity);

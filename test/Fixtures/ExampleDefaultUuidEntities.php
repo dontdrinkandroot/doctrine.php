@@ -19,34 +19,34 @@ class ExampleDefaultUuidEntities extends AbstractFixture
      */
     public function load(ObjectManager $manager)
     {
-        $entity = (new ExampleDefaultUuidEntity())
-            ->setName('One')
-            ->setUuid(self::UUID_1);
+        $entity = new ExampleDefaultUuidEntity();
+        $entity->setName('One');
+        $entity->setUuid(self::UUID_1);
         $manager->persist($entity);
 
-        $entity = (new ExampleDefaultUuidEntity())
-            ->setName('Two')
-            ->setUuid(self::UUID_2);
+        $entity = new ExampleDefaultUuidEntity();
+        $entity->setName('Two');
+        $entity->setUuid(self::UUID_2);
         $manager->persist($entity);
 
-        $entity = (new ExampleDefaultUuidEntity())
-            ->setName('Three')
-            ->setUuid('621ae4b4-31da-433f-9d3f-65c835741eec');
+        $entity = new ExampleDefaultUuidEntity();
+        $entity->setName('Three');
+        $entity->setUuid('621ae4b4-31da-433f-9d3f-65c835741eec');
         $manager->persist($entity);
 
-        $entity = (new ExampleDefaultUuidEntity())
-            ->setName('Four')
-            ->setUuid('30f43780-cf49-48a6-8099-b9d8532dc017');
+        $entity = new ExampleDefaultUuidEntity();
+        $entity->setName('Four');
+        $entity->setUuid('30f43780-cf49-48a6-8099-b9d8532dc017');
         $manager->persist($entity);
 
-        $entity = (new ExampleDefaultUuidEntity())
-            ->setName('Five')
-            ->setUuid('9ab2815c-f536-4436-a491-e2dcce249c17');
+        $entity = new ExampleDefaultUuidEntity();
+        $entity->setName('Five');
+        $entity->setUuid('9ab2815c-f536-4436-a491-e2dcce249c17');
         $manager->persist($entity);
 
-        $entity = (new ExampleDefaultUuidEntity())
-            ->setName('Six')
-            ->setUuid('030a962d-cc2d-4990-a34a-e374482df3ec');
+        $entity = new ExampleDefaultUuidEntity();
+        $entity->setName('Six');
+        $entity->setUuid('030a962d-cc2d-4990-a34a-e374482df3ec');
         $manager->persist($entity);
 
         $manager->flush();

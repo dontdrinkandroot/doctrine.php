@@ -5,22 +5,21 @@ namespace Dontdrinkandroot\Entity;
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
-class AssignedIntegerIdEntity
+class AssignedIntegerIdEntity implements IntegerIdEntityInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     private $id;
 
+    /**
+     * {@inheritdoc}
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(int $id): self
+    public function setId(int $id): void
     {
         $this->id = $id;
-
-        return $this;
     }
 }

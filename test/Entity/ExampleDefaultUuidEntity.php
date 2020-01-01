@@ -2,7 +2,7 @@
 
 namespace Dontdrinkandroot\Entity;
 
-use DateTime;
+use DateTimeInterface;
 
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
@@ -15,12 +15,12 @@ class ExampleDefaultUuidEntity extends DefaultUuidEntity implements CreatedEntit
     private $name;
 
     /**
-     * @var DateTime
+     * @var DateTimeInterface
      */
     private $created;
 
     /**
-     * @var DateTime
+     * @var DateTimeInterface
      */
     private $updated;
 
@@ -29,29 +29,27 @@ class ExampleDefaultUuidEntity extends DefaultUuidEntity implements CreatedEntit
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
-    public function getCreated(): ?DateTime
+    public function getCreated(): ?DateTimeInterface
     {
         return $this->created;
     }
 
-    public function setCreated(DateTime $created)
+    public function setCreated(DateTimeInterface $created)
     {
         $this->created = $created;
     }
 
-    public function getUpdated(): ?DateTime
+    public function getUpdated(): ?DateTimeInterface
     {
         return $this->updated;
     }
 
-    public function setUpdated(DateTime $updated)
+    public function setUpdated(DateTimeInterface $updated)
     {
         $this->updated = $updated;
     }

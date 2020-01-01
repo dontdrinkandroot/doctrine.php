@@ -7,13 +7,11 @@ namespace Dontdrinkandroot\Entity;
  */
 class StandaloneUuidEntity implements EntityInterface, UuidEntityInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $uuid;
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getUuid(): ?string
     {
@@ -21,7 +19,7 @@ class StandaloneUuidEntity implements EntityInterface, UuidEntityInterface
     }
 
     /**
-     * @param string $uuid
+     * {@inheritdoc}
      */
     public function setUuid(string $uuid): void
     {
@@ -29,7 +27,7 @@ class StandaloneUuidEntity implements EntityInterface, UuidEntityInterface
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getId(): string
     {
