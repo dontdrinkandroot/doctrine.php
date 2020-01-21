@@ -13,14 +13,10 @@ use Psr\Log\NullLogger;
  */
 class TransactionManager
 {
-    /**
-     * @var LoggerInterface
-     */
+    /** @var LoggerInterface */
     private $logger;
 
-    /**
-     * @var EntityManagerInterface
-     */
+    /** @var EntityManagerInterface */
     private $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
@@ -34,26 +30,26 @@ class TransactionManager
         $this->entityManager->beginTransaction();
     }
 
-    public function commitTransaction(): bool
+    public function commitTransaction(bool $forceFlush = false): bool
     {
         $nestingLevel = $this->entityManager->getConnection()->getTransactionNestingLevel();
-        $flush = false;
 
         /* No active transaction */
         if (!$this->isInTransaction()) {
             $this->logger->warning('No active Transaction for commit');
 
-            return $flush;
+            return false;
         }
 
+        $flushed = false;
         /* Topmost transaction, flush */
-        if (1 === $nestingLevel) {
-            $flush = true;
+        if (1 === $nestingLevel || $forceFlush) {
+            $flushed = true;
             $this->entityManager->flush();
         }
         $this->entityManager->commit();
 
-        return $flush;
+        return $flushed;
     }
 
     public function rollbackTransaction(): void
@@ -73,7 +69,7 @@ class TransactionManager
         return 0 !== $this->entityManager->getConnection()->getTransactionNestingLevel();
     }
 
-    public function transactional(Callable $func)
+    public function transactional(Callable $func, bool $forceFlush = false)
     {
         if (!is_callable($func)) {
             throw new InvalidArgumentException('Expected argument of type "callable", got "' . gettype($func) . '"');
@@ -84,7 +80,7 @@ class TransactionManager
         try {
             $return = call_user_func($func, $this);
 
-            $this->commitTransaction();
+            $this->commitTransaction($forceFlush);
 
             return $return;
         } catch (Exception $e) {
