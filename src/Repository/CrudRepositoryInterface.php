@@ -12,10 +12,19 @@ interface CrudRepositoryInterface extends ObjectRepository
 {
     public function persist(object $entity, bool $flush = true): object;
 
+    /**
+     * @deprecated
+     */
     public function merge(object $entity, bool $flush = false): object;
 
+    /**
+     * @deprecated
+     */
     public function flush(object $entity = null): void;
 
+    /**
+     * @deprecated
+     */
     public function detach(object $entity): void;
 
     public function removeById($id, bool $flush = false): void;
