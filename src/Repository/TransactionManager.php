@@ -61,6 +61,7 @@ class TransactionManager
             return;
         }
 
+        $this->entityManager->close();
         $this->entityManager->rollback();
     }
 
