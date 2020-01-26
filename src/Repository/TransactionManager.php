@@ -52,7 +52,7 @@ class TransactionManager
         return $flushed;
     }
 
-    public function rollbackTransaction(): void
+    public function rollbackTransaction(bool $closeEmOnException = true): void
     {
         /* No active transaction */
         if (!$this->isInTransaction()) {
@@ -61,7 +61,9 @@ class TransactionManager
             return;
         }
 
-        $this->entityManager->close();
+        if ($closeEmOnException) {
+            $this->entityManager->close();
+        }
         $this->entityManager->rollback();
     }
 
@@ -70,7 +72,7 @@ class TransactionManager
         return 0 !== $this->entityManager->getConnection()->getTransactionNestingLevel();
     }
 
-    public function transactional(Callable $func, bool $forceFlush = false)
+    public function transactional(Callable $func, bool $forceFlush = false, bool $closeEmOnException = true)
     {
         if (!is_callable($func)) {
             throw new InvalidArgumentException('Expected argument of type "callable", got "' . gettype($func) . '"');
@@ -85,7 +87,7 @@ class TransactionManager
 
             return $return;
         } catch (Exception $e) {
-            $this->rollbackTransaction();
+            $this->rollbackTransaction($closeEmOnException);
 
             throw $e;
         }
