@@ -5,7 +5,7 @@ namespace Dontdrinkandroot\Repository;
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
-class CrudAction
+class CrudOperation
 {
     const CREATE = 'CREATE';
     const READ = 'READ';
